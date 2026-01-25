@@ -25,6 +25,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { KidsSignupForm } from "@/components/site/KidsSignupForm";
 import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
 import bannerMinisterioInfantilRaw from "@/assets/banner-ministerio-infantil-raw.jpg";
+import bannerMinisterioInfantilTreated from "@/assets/banner-ministerio-infantil-treated.jpg";
 
 function BulletList({ items }: { items?: string[] }) {
   if (!items?.length) return null;
@@ -149,7 +150,7 @@ export default function MinisterioDetalhe() {
               src={heroSrc}
               srcSet={
                 isInfantil
-                  ? `${ministerio.imagem} 1x, ${bannerMinisterioInfantilRaw} 2x`
+                  ? `${bannerMinisterioInfantilTreated} 1x, ${bannerMinisterioInfantilRaw} 2x`
                   : undefined
               }
               alt={`Imagem do ministério ${ministerio.titulo}`}
