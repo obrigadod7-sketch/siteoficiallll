@@ -21,6 +21,7 @@ import { getMinisterioBySlug, MINISTERIO_SOCIALS } from "@/shared/ministerios";
 import CasaisMinisterio from "@/pages/CasaisMinisterio";
 import { useI18n } from "@/i18n/I18nProvider";
 import { KidsSignupForm } from "@/components/site/KidsSignupForm";
+import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
 
 function BulletList({ items }: { items?: string[] }) {
   if (!items?.length) return null;
@@ -234,6 +235,36 @@ export default function MinisterioDetalhe() {
         </section>
 
         <section className="mx-auto w-full max-w-[1100px] px-6 pb-16">
+          {isInfantil && (
+            <div className="-mt-10 mb-8">
+              <Card className="overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="grid items-center gap-6 md:grid-cols-[280px_1fr]">
+                    <div className="rounded-md border border-border bg-muted/60 p-4">
+                      <img
+                        src={responsavelInfantil}
+                        alt="Responsável pelo Ministério Infantil"
+                        className="mx-auto h-auto w-full max-w-[240px] object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <div>
+                      <h2 className="font-display text-xl uppercase tracking-[0.12em] md:text-2xl">
+                        Responsável pelo Ministério Infantil
+                      </h2>
+                      <p className="mt-3 text-sm text-muted-foreground">
+                        Com amor e dedicação, cuidamos das crianças durante os cultos e atividades,
+                        ensinando a Palavra de forma acessível e segura, fortalecendo valores cristãos e
+                        apoiando as famílias no discipulado.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
