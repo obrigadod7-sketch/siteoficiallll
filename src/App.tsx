@@ -13,6 +13,7 @@ import MinisterioDetalhe from "./pages/MinisterioDetalhe";
 import Missoes from "./pages/Missoes";
 import NotFound from "./pages/NotFound";
 import KidsPlatform from "./pages/KidsPlatform";
+import MinisterioJovens from "./pages/MinisterioJovens";
 import Login from "./pages/auth/Login";
 import AdminSetup from "./pages/auth/AdminSetup";
 import ResetPassword from "./pages/auth/ResetPassword";
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/missoes" element={<Missoes />} />
             <Route path="/ministerios" element={<Ministerios />} />
             <Route path="/ministerios/:slug" element={<MinisterioDetalhe />} />
+            <Route path="/ministerio-dos-jovens" element={<MinisterioJovens />} />
 
             {/* Kids platform */}
             <Route path="/kids" element={<KidsPlatform />} />
