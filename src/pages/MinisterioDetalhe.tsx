@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { ElementorHeader } from "@/components/site/ElementorHeader";
@@ -6,6 +7,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Carousel,
   CarouselContent,
@@ -49,6 +51,7 @@ export default function MinisterioDetalhe() {
   const isCasais = ministerio?.slug === "ministerio-de-casais";
   const isInfantil = ministerio?.slug === "ministerio-infantil";
   const { t } = useI18n();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const infantil = isInfantil
     ? {
@@ -98,6 +101,7 @@ export default function MinisterioDetalhe() {
 
   const scrapedImages = (mediaQuery.data?.images || []).filter(Boolean);
   const galleryImages = (ministerio?.galeria || []).filter(Boolean);
+  const lightboxImages = useMemo(() => galleryImages, [galleryImages]);
   const pickedHero =
     scrapedImages.length > 0 && ministerio
       ? scrapedImages[hashString(ministerio.slug) % scrapedImages.length]
@@ -234,6 +238,45 @@ export default function MinisterioDetalhe() {
           </div>
         </section>
 
+        {galleryImages.length > 0 && (
+          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-display uppercase tracking-[0.12em]">Galeria</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Carousel opts={{ align: "start", dragFree: true }} className="relative">
+                  <CarouselContent className="-ml-3">
+                    {galleryImages.map((src, idx) => (
+                      <CarouselItem
+                        key={src}
+                        className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
+                      >
+                        <button
+                          type="button"
+                          className="group relative block w-full overflow-hidden rounded-md border border-border bg-muted/60"
+                          onClick={() => setLightboxIndex(idx)}
+                          aria-label="Abrir imagem em zoom"
+                        >
+                          <img
+                            src={src}
+                            alt={`Foto do ministério ${ministerio.titulo}`}
+                            className="aspect-square h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+                            loading="lazy"
+                          />
+                        </button>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+
+                  <CarouselPrevious className="-left-4 hidden md:inline-flex" />
+                  <CarouselNext className="-right-4 hidden md:inline-flex" />
+                </Carousel>
+              </CardContent>
+            </Card>
+          </section>
+        )}
+
         <section className="mx-auto w-full max-w-[1100px] px-6 pb-16">
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
@@ -340,12 +383,14 @@ export default function MinisterioDetalhe() {
                 <CardContent className="p-6">
                   <div className="grid items-center gap-6 md:grid-cols-[320px_1fr]">
                     <div className="rounded-md border border-border bg-muted/60 p-4">
-                      <img
-                        src={responsavelInfantil}
-                        alt="Responsável pelo Ministério Infantil"
-                        className="mx-auto h-auto w-full max-w-[300px] scale-[1.08] object-contain"
-                        loading="lazy"
-                      />
+                      <div className="mx-auto w-full max-w-[320px] overflow-hidden rounded-sm">
+                        <img
+                          src={responsavelInfantil}
+                          alt="Responsável pelo Ministério Infantil"
+                          className="h-[360px] w-full scale-[1.22] object-cover object-top md:h-[420px]"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
 
                     <div>
@@ -364,39 +409,7 @@ export default function MinisterioDetalhe() {
             </div>
           )}
 
-          {galleryImages.length > 0 && (
-            <div className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="font-display uppercase tracking-[0.12em]">Galeria</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Carousel opts={{ align: "start", dragFree: true }} className="relative">
-                    <CarouselContent className="-ml-3">
-                      {galleryImages.map((src) => (
-                        <CarouselItem
-                          key={src}
-                          className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
-                        >
-                          <div className="relative overflow-hidden rounded-md border border-border bg-muted/60">
-                            <img
-                              src={src}
-                              alt={`Foto do ministério ${ministerio.titulo}`}
-                              className="aspect-square h-full w-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-
-                    <CarouselPrevious className="-left-4 hidden md:inline-flex" />
-                    <CarouselNext className="-right-4 hidden md:inline-flex" />
-                  </Carousel>
-                </CardContent>
-              </Card>
-            </div>
-          )}
+          {galleryImages.length > 0 && <div className="mt-6" />}
 
           {scrapedImages.length > 0 && (
             <div className="mt-6">
@@ -423,6 +436,48 @@ export default function MinisterioDetalhe() {
             </div>
           )}
         </section>
+
+        <Dialog open={lightboxIndex !== null} onOpenChange={(open) => (!open ? setLightboxIndex(null) : null)}>
+          <DialogContent className="max-w-[92vw] p-0 sm:max-w-[860px]">
+            {lightboxIndex !== null && (
+              <div className="relative">
+                <div className="relative aspect-[4/3] w-full bg-muted">
+                  <img
+                    src={lightboxImages[lightboxIndex]}
+                    alt={`Foto do ministério ${ministerio.titulo}`}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between gap-2 border-t border-border bg-background p-3">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                      setLightboxIndex((i) =>
+                        i === null ? null : (i - 1 + lightboxImages.length) % lightboxImages.length
+                      )
+                    }
+                    disabled={lightboxImages.length <= 1}
+                  >
+                    Anterior
+                  </Button>
+                  <p className="text-xs text-muted-foreground">
+                    {lightboxIndex + 1} / {lightboxImages.length}
+                  </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setLightboxIndex((i) => (i === null ? null : (i + 1) % lightboxImages.length))}
+                    disabled={lightboxImages.length <= 1}
+                  >
+                    Próxima
+                  </Button>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </main>
 
       <SiteFooter />
