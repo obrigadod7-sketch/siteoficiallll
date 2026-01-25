@@ -158,7 +158,9 @@ export default function MinisterioDetalhe() {
                 "h-full w-full " +
                 (isCasais
                   ? "object-contain bg-muted"
-                  : "object-cover")
+                  : isInfantil
+                    ? "object-cover object-[center_22%] md:object-center"
+                    : "object-cover")
               }
               loading="lazy"
             />
