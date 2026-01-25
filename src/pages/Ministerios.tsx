@@ -8,6 +8,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 
 import { MINISTERIOS, MINISTERIO_SOCIALS } from "@/shared/ministerios";
 
+import jovensHeroPlaceholder from "@/assets/hero-oficial-2-1.png";
+
 export default function Ministerios() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -69,6 +71,35 @@ export default function Ministerios() {
                 </CardFooter>
               </Card>
             ))}
+
+            {/* Card extra: página exclusiva (não faz parte do array de ministérios) */}
+            <Card className="overflow-hidden">
+              <div className="relative aspect-[16/9]">
+                <img
+                  src={jovensHeroPlaceholder}
+                  alt="Foto do Ministério dos Jovens"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/25 to-transparent" />
+              </div>
+
+              <CardHeader>
+                <CardTitle className="font-display uppercase tracking-[0.12em]">Ministério dos Jovens</CardTitle>
+              </CardHeader>
+
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Um espaço para crescer na Palavra, construir amizades saudáveis e servir a Deus com alegria.
+                </p>
+              </CardContent>
+
+              <CardFooter>
+                <Button asChild variant="default" className="w-full">
+                  <Link to="/ministerio-dos-jovens">Ver detalhes</Link>
+                </Button>
+              </CardFooter>
+            </Card>
           </div>
         </section>
       </main>
