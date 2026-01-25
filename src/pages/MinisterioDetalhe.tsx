@@ -440,7 +440,7 @@ export default function MinisterioDetalhe() {
                             src={responsavelInfantil}
                             alt="Responsável pelo Ministério Infantil"
                             // Quadrado + zoom para destacar o rosto/parte superior
-                            className="h-full w-full scale-[1.52] object-cover object-[50%_34%]"
+                            className="h-full w-full scale-[1.44] object-cover object-[50%_46%]"
                             loading="lazy"
                             decoding="async"
                           />
