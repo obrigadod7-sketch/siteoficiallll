@@ -159,12 +159,19 @@ export default function MinisterioDetalhe() {
                 (isCasais
                   ? "object-contain bg-muted"
                   : isInfantil
-                    ? "object-cover object-[center_22%] md:object-center"
+                    ? "object-cover object-[center_22%] md:object-center contrast-[1.08] saturate-[1.08]"
                     : "object-cover")
               }
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/65 to-background" />
+            <div
+              className={
+                "absolute inset-0 bg-gradient-to-b " +
+                (isInfantil
+                  ? "from-background/0 via-background/40 to-background"
+                  : "from-background/10 via-background/65 to-background")
+              }
+            />
           </div>
 
           <div className="relative mx-auto w-full max-w-[1100px] px-6 py-14 md:py-20">
