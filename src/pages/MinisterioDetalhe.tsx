@@ -26,6 +26,8 @@ import { KidsSignupForm } from "@/components/site/KidsSignupForm";
 import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
 import bannerMinisterioInfantilRaw from "@/assets/banner-ministerio-infantil-raw.jpg";
 import bannerMinisterioInfantilTreatedV2 from "@/assets/banner-ministerio-infantil-treated-v2.jpg";
+import bannerMinisterioInfantilCrop from "@/assets/banner-ministerio-infantil-crop.jpg";
+import bannerMinisterioInfantilCrop2x from "@/assets/banner-ministerio-infantil-crop-2x.jpg";
 
 function BulletList({ items }: { items?: string[] }) {
   if (!items?.length) return null;
@@ -107,7 +109,7 @@ export default function MinisterioDetalhe() {
     scrapedImages.length > 0 && ministerio
       ? scrapedImages[hashString(ministerio.slug) % scrapedImages.length]
       : undefined;
-  const heroSrc = isInfantil ? ministerio.imagem : pickedHero || ministerio.imagem;
+  const heroSrc = isInfantil ? bannerMinisterioInfantilCrop : pickedHero || ministerio.imagem;
   const lightboxImages = useMemo(() => galleryImages, [galleryImages]);
 
   if (!ministerio) {
@@ -150,7 +152,7 @@ export default function MinisterioDetalhe() {
               src={heroSrc}
               srcSet={
                 isInfantil
-                  ? `${bannerMinisterioInfantilTreatedV2} 1x, ${bannerMinisterioInfantilRaw} 2x`
+                  ? `${bannerMinisterioInfantilCrop} 1x, ${bannerMinisterioInfantilCrop2x} 2x`
                   : undefined
               }
               alt={`Imagem do ministério ${ministerio.titulo}`}
@@ -159,7 +161,7 @@ export default function MinisterioDetalhe() {
                 (isCasais
                   ? "object-contain bg-muted"
                   : isInfantil
-                    ? "object-cover object-[center_18%] md:object-center contrast-[1.08] saturate-[1.08] scale-[1.06] md:scale-[1.02]"
+                    ? "object-cover object-[center_18%] md:object-center contrast-[1.08] saturate-[1.08]"
                     : "object-cover")
               }
               loading="lazy"
