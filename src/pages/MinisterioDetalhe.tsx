@@ -170,7 +170,8 @@ export default function MinisterioDetalhe() {
                   src={heroSrc}
                   alt={`Imagem do ministério ${ministerio.titulo}`}
                   className={
-                    "h-full w-full contrast-[1.06] saturate-[1.06] " +
+                    // Leve suavização para reduzir o aspecto “duro”/exagerado do tratamento
+                    "h-full w-full contrast-[1.03] saturate-[1.03] " +
                     // Mobile/Tablet: cover para eliminar espaços; Desktop: contain para não cortar pessoas
                     "object-cover lg:object-contain lg:bg-muted"
                   }
@@ -254,23 +255,28 @@ export default function MinisterioDetalhe() {
                 </Button>
               )}
 
-              <Button asChild variant="outline">
-                <a href={MINISTERIO_SOCIALS.facebook} target="_blank" rel="noreferrer">
-                  Facebook
-                </a>
-              </Button>
+              {/* Remove redes sociais do banner do Ministério Infantil (mantém para os outros) */}
+              {!isInfantil && (
+                <>
+                  <Button asChild variant="outline">
+                    <a href={MINISTERIO_SOCIALS.facebook} target="_blank" rel="noreferrer">
+                      Facebook
+                    </a>
+                  </Button>
 
-              <Button asChild variant="outline">
-                <a href={MINISTERIO_SOCIALS.instagram} target="_blank" rel="noreferrer">
-                  Instagram
-                </a>
-              </Button>
+                  <Button asChild variant="outline">
+                    <a href={MINISTERIO_SOCIALS.instagram} target="_blank" rel="noreferrer">
+                      Instagram
+                    </a>
+                  </Button>
 
-              <Button asChild variant="outline">
-                <a href={MINISTERIO_SOCIALS.youtube} target="_blank" rel="noreferrer">
-                  YouTube
-                </a>
-              </Button>
+                  <Button asChild variant="outline">
+                    <a href={MINISTERIO_SOCIALS.youtube} target="_blank" rel="noreferrer">
+                      YouTube
+                    </a>
+                  </Button>
+                </>
+              )}
 
               <Button asChild variant="ghost">
                 <Link to="/ministerios">Voltar</Link>
