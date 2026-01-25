@@ -141,7 +141,7 @@ export default function MinisterioDetalhe() {
             (isCasais
               ? "min-h-[360px] md:min-h-[440px]"
               : isInfantil
-                ? "min-h-[420px] md:min-h-[520px]"
+                ? "min-h-[360px] md:min-h-[460px]"
                 : "")
           }
         >
@@ -159,7 +159,7 @@ export default function MinisterioDetalhe() {
                 (isCasais
                   ? "object-contain bg-muted"
                   : isInfantil
-                    ? "object-cover object-[center_22%] md:object-center contrast-[1.08] saturate-[1.08]"
+                    ? "object-cover object-[center_22%] md:object-center contrast-[1.08] saturate-[1.08] scale-[1.04]"
                     : "object-cover")
               }
               loading="lazy"
