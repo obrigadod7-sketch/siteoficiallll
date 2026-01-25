@@ -127,7 +127,16 @@ export default function MinisterioDetalhe() {
       <ElementorHeader />
 
       <main>
-        <section className={"relative " + (isCasais ? "min-h-[360px] md:min-h-[440px]" : "")}>
+        <section
+          className={
+            "relative " +
+            (isCasais
+              ? "min-h-[360px] md:min-h-[440px]"
+              : isInfantil
+                ? "min-h-[420px] md:min-h-[520px]"
+                : "")
+          }
+        >
           <div className="absolute inset-0">
             <img
               src={pickedHero || ministerio.imagem}
