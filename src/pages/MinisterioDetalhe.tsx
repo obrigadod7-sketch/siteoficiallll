@@ -175,7 +175,10 @@ export default function MinisterioDetalhe() {
                     // Mobile/Tablet: cover para eliminar espaços; Desktop: contain para não cortar pessoas
                     "object-cover lg:object-contain lg:bg-muted"
                   }
-                  loading="lazy"
+                  // Banner é a imagem mais importante da página
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
               </picture>
             ) : (
@@ -310,6 +313,7 @@ export default function MinisterioDetalhe() {
                             alt={`Foto do ministério ${ministerio.titulo}`}
                             className="aspect-square h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                             loading="lazy"
+                            decoding="async"
                           />
                         </button>
                       </CarouselItem>
@@ -473,6 +477,7 @@ export default function MinisterioDetalhe() {
                           alt={`Foto do ministério ${ministerio.titulo}`}
                           className="aspect-[4/3] h-full w-full object-cover"
                           loading="lazy"
+                          decoding="async"
                           referrerPolicy="no-referrer"
                         />
                       </div>
@@ -493,6 +498,7 @@ export default function MinisterioDetalhe() {
                     src={lightboxImages[lightboxIndex]}
                     alt={`Foto do ministério ${ministerio.titulo}`}
                     className="h-full w-full object-contain"
+                    decoding="async"
                   />
                 </div>
 
