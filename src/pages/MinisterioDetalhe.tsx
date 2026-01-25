@@ -435,12 +435,16 @@ export default function MinisterioDetalhe() {
                   <div className="grid items-center gap-6 md:grid-cols-[320px_1fr]">
                     <div className="rounded-md border border-border bg-muted/60 p-4">
                       <div className="mx-auto w-full max-w-[320px] overflow-hidden rounded-sm">
-                        <img
-                          src={responsavelInfantil}
-                          alt="Responsável pelo Ministério Infantil"
-                          className="h-[360px] w-full scale-[1.22] object-cover object-top md:h-[420px]"
-                          loading="lazy"
-                        />
+                        <div className="aspect-square w-full overflow-hidden">
+                          <img
+                            src={responsavelInfantil}
+                            alt="Responsável pelo Ministério Infantil"
+                            // Quadrado + zoom para destacar o rosto/parte superior
+                            className="h-full w-full scale-[1.38] object-cover object-top"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
                       </div>
                     </div>
 
