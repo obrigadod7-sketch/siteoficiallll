@@ -28,6 +28,8 @@ import bannerMinisterioInfantilRaw from "@/assets/banner-ministerio-infantil-raw
 import bannerMinisterioInfantilTreatedV2 from "@/assets/banner-ministerio-infantil-treated-v2.jpg";
 import bannerMinisterioInfantilCrop from "@/assets/banner-ministerio-infantil-crop.jpg";
 import bannerMinisterioInfantilCrop2x from "@/assets/banner-ministerio-infantil-crop-2x.jpg";
+import bannerMinisterioInfantilMobile from "@/assets/banner-ministerio-infantil-mobile-clean.jpg";
+import bannerMinisterioInfantilMobile2x from "@/assets/banner-ministerio-infantil-mobile-clean-2x.jpg";
 
 function BulletList({ items }: { items?: string[] }) {
   if (!items?.length) return null;
@@ -143,29 +145,42 @@ export default function MinisterioDetalhe() {
             (isCasais
               ? "min-h-[360px] md:min-h-[440px]"
               : isInfantil
-                ? "min-h-[360px] md:min-h-[460px]"
+                ? "min-h-[320px] sm:min-h-[360px] lg:min-h-[560px]"
                 : "")
           }
         >
           <div className="absolute inset-0">
-            <img
-              src={heroSrc}
-              srcSet={
-                isInfantil
-                  ? `${bannerMinisterioInfantilCrop} 1x, ${bannerMinisterioInfantilCrop2x} 2x`
-                  : undefined
-              }
-              alt={`Imagem do ministério ${ministerio.titulo}`}
-              className={
-                "h-full w-full " +
-                (isCasais
-                  ? "object-contain bg-muted"
-                  : isInfantil
-                    ? "object-contain bg-muted contrast-[1.06] saturate-[1.06]"
-                    : "object-cover")
-              }
-              loading="lazy"
-            />
+            {isInfantil ? (
+              <picture>
+                {/* Mobile/Tablet: preenche o quadro sem faixas brancas */}
+                <source
+                  media="(max-width: 1023px)"
+                  srcSet={`${bannerMinisterioInfantilMobile} 1x, ${bannerMinisterioInfantilMobile2x} 2x`}
+                />
+                {/* Desktop: mantém todas as pessoas visíveis e aumenta altura */}
+                <source srcSet={`${bannerMinisterioInfantilCrop} 1x, ${bannerMinisterioInfantilCrop2x} 2x`} />
+                <img
+                  src={heroSrc}
+                  alt={`Imagem do ministério ${ministerio.titulo}`}
+                  className={
+                    "h-full w-full contrast-[1.06] saturate-[1.06] " +
+                    // Mobile/Tablet: cover para eliminar espaços; Desktop: contain para não cortar pessoas
+                    "object-cover lg:object-contain lg:bg-muted"
+                  }
+                  loading="lazy"
+                />
+              </picture>
+            ) : (
+              <img
+                src={heroSrc}
+                alt={`Imagem do ministério ${ministerio.titulo}`}
+                className={
+                  "h-full w-full " +
+                  (isCasais ? "object-contain bg-muted" : "object-cover")
+                }
+                loading="lazy"
+              />
+            )}
             <div
               className={
                 "absolute inset-0 bg-gradient-to-b " +
