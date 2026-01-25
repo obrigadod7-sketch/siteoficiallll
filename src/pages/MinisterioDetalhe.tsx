@@ -376,13 +376,13 @@ export default function MinisterioDetalhe() {
                       {galleryImages.map((src) => (
                         <CarouselItem
                           key={src}
-                          className="basis-[84%] pl-3 sm:basis-[52%] md:basis-[36%] lg:basis-[28%]"
+                          className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
                         >
-                           <div className="relative overflow-hidden rounded-md border border-border bg-muted/60 p-3">
+                          <div className="relative overflow-hidden rounded-md border border-border bg-muted/60">
                             <img
                               src={src}
                               alt={`Foto do ministério ${ministerio.titulo}`}
-                               className="aspect-square h-full w-full rounded-sm bg-muted object-contain"
+                              className="aspect-square h-full w-full object-cover"
                               loading="lazy"
                             />
                           </div>
