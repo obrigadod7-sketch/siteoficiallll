@@ -30,6 +30,8 @@ import bannerMinisterioInfantilCrop from "@/assets/banner-ministerio-infantil-cr
 import bannerMinisterioInfantilCrop2x from "@/assets/banner-ministerio-infantil-crop-2x.jpg";
 import bannerMinisterioInfantilMobile from "@/assets/banner-ministerio-infantil-mobile-clean.jpg";
 import bannerMinisterioInfantilMobile2x from "@/assets/banner-ministerio-infantil-mobile-clean-2x.jpg";
+import bannerMinisterioInfantilMobileFinal from "@/assets/banner-ministerio-infantil-mobile-final.jpg";
+import bannerMinisterioInfantilMobileFinal2x from "@/assets/banner-ministerio-infantil-mobile-final-2x.jpg";
 
 function BulletList({ items }: { items?: string[] }) {
   if (!items?.length) return null;
@@ -152,7 +154,12 @@ export default function MinisterioDetalhe() {
           <div className="absolute inset-0">
             {isInfantil ? (
               <picture>
-                {/* Mobile/Tablet: preenche o quadro sem faixas brancas */}
+                {/* Celular: versão sem bordas claras nas laterais */}
+                <source
+                  media="(max-width: 639px)"
+                  srcSet={`${bannerMinisterioInfantilMobileFinal} 1x, ${bannerMinisterioInfantilMobileFinal2x} 2x`}
+                />
+                {/* Tablet: mantém a versão anterior */}
                 <source
                   media="(max-width: 1023px)"
                   srcSet={`${bannerMinisterioInfantilMobile} 1x, ${bannerMinisterioInfantilMobile2x} 2x`}
