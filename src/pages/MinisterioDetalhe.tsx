@@ -347,11 +347,11 @@ export default function MinisterioDetalhe() {
                           key={src}
                           className="basis-[84%] pl-3 sm:basis-[52%] md:basis-[36%] lg:basis-[28%]"
                         >
-                          <div className="relative overflow-hidden rounded-md border border-border bg-muted">
+                           <div className="relative overflow-hidden rounded-md border border-border bg-muted">
                             <img
                               src={src}
                               alt={`Foto do ministério ${ministerio.titulo}`}
-                              className="aspect-[3/4] h-full w-full object-contain"
+                               className="aspect-square h-full w-full object-contain"
                               loading="lazy"
                             />
                           </div>
