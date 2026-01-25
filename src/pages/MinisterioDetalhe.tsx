@@ -161,7 +161,7 @@ export default function MinisterioDetalhe() {
                 (isCasais
                   ? "object-contain bg-muted"
                   : isInfantil
-                    ? "object-cover object-[center_18%] md:object-center contrast-[1.08] saturate-[1.08]"
+                    ? "object-contain bg-muted contrast-[1.06] saturate-[1.06]"
                     : "object-cover")
               }
               loading="lazy"
