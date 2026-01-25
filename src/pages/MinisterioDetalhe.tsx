@@ -235,36 +235,6 @@ export default function MinisterioDetalhe() {
         </section>
 
         <section className="mx-auto w-full max-w-[1100px] px-6 pb-16">
-          {isInfantil && (
-            <div className="-mt-10 mb-8">
-              <Card className="overflow-hidden">
-                <CardContent className="p-6">
-                  <div className="grid items-center gap-6 md:grid-cols-[280px_1fr]">
-                    <div className="rounded-md border border-border bg-muted/60 p-4">
-                      <img
-                        src={responsavelInfantil}
-                        alt="Responsável pelo Ministério Infantil"
-                        className="mx-auto h-auto w-full max-w-[240px] object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-
-                    <div>
-                      <h2 className="font-display text-xl uppercase tracking-[0.12em] md:text-2xl">
-                        Responsável pelo Ministério Infantil
-                      </h2>
-                      <p className="mt-3 text-sm text-muted-foreground">
-                        Com amor e dedicação, cuidamos das crianças durante os cultos e atividades,
-                        ensinando a Palavra de forma acessível e segura, fortalecendo valores cristãos e
-                        apoiando as famílias no discipulado.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
-
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
@@ -359,6 +329,36 @@ export default function MinisterioDetalhe() {
                 <CardContent>
                   <p className="text-sm italic text-muted-foreground">“{ministerio.versiculo.texto}”</p>
                   <p className="mt-2 text-sm font-semibold text-foreground">{ministerio.versiculo.referencia}</p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {isInfantil && (
+            <div className="mt-6">
+              <Card className="overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="grid items-center gap-6 md:grid-cols-[320px_1fr]">
+                    <div className="rounded-md border border-border bg-muted/60 p-4">
+                      <img
+                        src={responsavelInfantil}
+                        alt="Responsável pelo Ministério Infantil"
+                        className="mx-auto h-auto w-full max-w-[300px] scale-[1.08] object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <div>
+                      <h2 className="font-display text-xl uppercase tracking-[0.12em] md:text-2xl">
+                        Responsável pelo Ministério Infantil
+                      </h2>
+                      <p className="mt-3 text-sm text-muted-foreground">
+                        Com amor e dedicação, cuidamos das crianças durante os cultos e atividades,
+                        ensinando a Palavra de forma acessível e segura, fortalecendo valores cristãos e
+                        apoiando as famílias no discipulado.
+                      </p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
