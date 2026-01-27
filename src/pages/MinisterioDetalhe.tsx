@@ -24,14 +24,7 @@ import CasaisMinisterio from "@/pages/CasaisMinisterio";
 import { useI18n } from "@/i18n/I18nProvider";
 import { KidsSignupForm } from "@/components/site/KidsSignupForm";
 import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
-import bannerMinisterioInfantilRaw from "@/assets/banner-ministerio-infantil-raw.jpg";
-import bannerMinisterioInfantilTreatedV2 from "@/assets/banner-ministerio-infantil-treated-v2.jpg";
-import bannerMinisterioInfantilCrop from "@/assets/banner-ministerio-infantil-crop.jpg";
-import bannerMinisterioInfantilCrop2x from "@/assets/banner-ministerio-infantil-crop-2x.jpg";
-import bannerMinisterioInfantilMobile from "@/assets/banner-ministerio-infantil-mobile-clean.jpg";
-import bannerMinisterioInfantilMobile2x from "@/assets/banner-ministerio-infantil-mobile-clean-2x.jpg";
-import bannerMinisterioInfantilMobileFinal from "@/assets/banner-ministerio-infantil-mobile-final.jpg";
-import bannerMinisterioInfantilMobileFinal2x from "@/assets/banner-ministerio-infantil-mobile-final-2x.jpg";
+import bannerMinisterioInfantilMelhorado from "@/assets/banner-ministerio-infantil-melhorado.jpg";
 
 import infantilExtra01 from "@/assets/infantil-extra-01.jpg";
 import infantilExtra02 from "@/assets/infantil-extra-02.jpg";
@@ -121,7 +114,7 @@ export default function MinisterioDetalhe() {
     scrapedImages.length > 0 && ministerio
       ? scrapedImages[hashString(ministerio.slug) % scrapedImages.length]
       : undefined;
-  const heroSrc = isInfantil ? bannerMinisterioInfantilCrop : pickedHero || ministerio.imagem;
+  const heroSrc = isInfantil ? bannerMinisterioInfantilMelhorado : pickedHero || ministerio.imagem;
 
   const infantilExtraImages = useMemo(() => {
     if (!isInfantil) return [] as string[];
@@ -179,24 +172,20 @@ export default function MinisterioDetalhe() {
           <div className="absolute inset-0">
             {isInfantil ? (
               <picture>
-                {/* Celular: versão sem bordas claras nas laterais */}
                 <source
                   media="(max-width: 639px)"
-                  srcSet={`${bannerMinisterioInfantilMobileFinal} 1x, ${bannerMinisterioInfantilMobileFinal2x} 2x`}
+                  srcSet={bannerMinisterioInfantilMelhorado}
                 />
-                {/* Tablet: mantém a versão anterior */}
                 <source
                   media="(max-width: 1023px)"
-                  srcSet={`${bannerMinisterioInfantilMobile} 1x, ${bannerMinisterioInfantilMobile2x} 2x`}
+                  srcSet={bannerMinisterioInfantilMelhorado}
                 />
-                {/* Desktop: mantém todas as pessoas visíveis e aumenta altura */}
-                <source srcSet={`${bannerMinisterioInfantilCrop} 1x, ${bannerMinisterioInfantilCrop2x} 2x`} />
+                <source srcSet={bannerMinisterioInfantilMelhorado} />
                 <img
                   src={heroSrc}
                   alt={`Imagem do ministério ${ministerio.titulo}`}
                   className={
-                    // Leve suavização para reduzir o aspecto “duro”/exagerado do tratamento
-                    "h-full w-full contrast-[1.03] saturate-[1.03] " +
+                    "h-full w-full " +
                     // Mobile/Tablet: cover para eliminar espaços; Desktop: contain para não cortar pessoas
                     "object-cover lg:object-contain lg:bg-muted"
                   }
