@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,31 +13,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 
-type LoginValues = {
+type Values = {
   email: string;
-  password: string;
 };
 
-export default function Login() {
+export default function ForgotPassword() {
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const schema = useMemo(
     () =>
       z.object({
         email: z.string().trim().email("Email inválido"),
-        password: z.string().min(6, "Senha muito curta"),
       }),
     [],
   );
 
-  const form = useForm<LoginValues>({
+  const form = useForm<Values>({
     resolver: zodResolver(schema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: "" },
   });
-
-  const from = (location.state as any)?.from ?? "/kids/dashboard";
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -45,9 +40,9 @@ export default function Login() {
 
       <main className="flex-1">
         <section className="mx-auto w-full max-w-[520px] px-6 py-12">
-          <h1 className="font-display text-3xl uppercase tracking-[0.14em]">Acesso ao Dashboard</h1>
+          <h1 className="font-display text-3xl uppercase tracking-[0.14em]">Recuperar senha</h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Entre com seu e-mail e senha para acessar check-in, crianças, eventos e relatórios.
+            Informe seu e-mail. Você receberá um link para definir uma nova senha.
           </p>
 
           <Card className="mt-8 p-6 shadow-elev ring-1 ring-border">
@@ -56,15 +51,20 @@ export default function Login() {
               onSubmit={form.handleSubmit(async (values) => {
                 setSubmitting(true);
                 try {
-                  const { error } = await supabase.auth.signInWithPassword({
-                    email: values.email,
-                    password: values.password,
-                  });
+                  const redirectTo = `${window.location.origin}/reset-password`;
+                  const { error } = await supabase.auth.resetPasswordForEmail(values.email, { redirectTo });
                   if (error) throw error;
-                  toast({ title: "Bem-vindo!" });
-                  navigate(from, { replace: true });
+
+                  toast({
+                    title: "Email enviado!",
+                    description: "Verifique sua caixa de entrada (e spam).",
+                  });
                 } catch (e: any) {
-                  toast({ title: "Falha no login", description: e?.message ?? "Tente novamente.", variant: "destructive" });
+                  toast({
+                    title: "Não foi possível enviar",
+                    description: e?.message ?? "Tente novamente.",
+                    variant: "destructive",
+                  });
                 } finally {
                   setSubmitting(false);
                 }
@@ -78,25 +78,14 @@ export default function Login() {
                 ) : null}
               </div>
 
-              <div className="grid gap-2">
-                <Label htmlFor="password">Senha</Label>
-                <Input id="password" type="password" autoComplete="current-password" {...form.register("password")} />
-                {form.formState.errors.password ? (
-                  <p className="text-xs text-destructive">{form.formState.errors.password.message}</p>
-                ) : null}
-              </div>
-
               <Button type="submit" disabled={submitting}>
-                {submitting ? "Entrando..." : "Entrar"}
+                {submitting ? "Enviando..." : "Enviar link"}
               </Button>
 
-              <Button type="button" variant="link" className="justify-start px-0" onClick={() => navigate("/forgot-password")}>
-                Esqueci minha senha
+              <Button type="button" variant="secondary" onClick={() => navigate("/login")}
+              >
+                Voltar ao login
               </Button>
-
-              <p className="text-xs text-muted-foreground">
-                Precisa de acesso? Um administrador deve criar seu usuário e atribuir o perfil (Admin/Líder/Voluntário).
-              </p>
             </form>
           </Card>
         </section>
