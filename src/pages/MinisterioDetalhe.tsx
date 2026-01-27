@@ -36,6 +36,10 @@ import bannerMinisterioInfantilMobileFinal2x from "@/assets/banner-ministerio-in
 import infantilExtra01 from "@/assets/infantil-extra-01.jpg";
 import infantilExtra02 from "@/assets/infantil-extra-02.jpg";
 import infantilExtra03 from "@/assets/infantil-extra-03.jpg";
+import infantilExtra04 from "@/assets/infantil-extra-04.jpg";
+import infantilExtra05 from "@/assets/infantil-extra-05.jpg";
+import infantilExtra06 from "@/assets/infantil-extra-06.jpg";
+import infantilExtra07 from "@/assets/infantil-extra-07.jpg";
 
 function BulletList({ items }: { items?: string[] }) {
   if (!items?.length) return null;
@@ -121,7 +125,15 @@ export default function MinisterioDetalhe() {
 
   const infantilExtraImages = useMemo(() => {
     if (!isInfantil) return [] as string[];
-    return [infantilExtra01, infantilExtra02, infantilExtra03].filter(Boolean);
+    return [
+      infantilExtra01,
+      infantilExtra02,
+      infantilExtra03,
+      infantilExtra04,
+      infantilExtra05,
+      infantilExtra06,
+      infantilExtra07,
+    ].filter(Boolean);
   }, [isInfantil]);
 
   const lightboxImages = useMemo(
