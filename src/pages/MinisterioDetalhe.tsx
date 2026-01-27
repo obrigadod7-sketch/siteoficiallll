@@ -165,7 +165,7 @@ export default function MinisterioDetalhe() {
             (isCasais
               ? "min-h-[360px] md:min-h-[440px]"
               : isInfantil
-                ? "min-h-[320px] sm:min-h-[360px] lg:min-h-[560px]"
+                ? "min-h-[420px] sm:min-h-[520px] lg:min-h-[80vh]"
                 : "")
           }
         >
@@ -186,8 +186,8 @@ export default function MinisterioDetalhe() {
                   alt={`Imagem do ministério ${ministerio.titulo}`}
                   className={
                     "h-full w-full " +
-                    // Mobile/Tablet: cover para eliminar espaços; Desktop: contain para não cortar pessoas
-                    "object-cover lg:object-contain lg:bg-muted"
+                    // Preenche mais a tela (pode cortar um pouco) conforme solicitado
+                    "object-cover"
                   }
                   // Banner é a imagem mais importante da página
                   loading="eager"
