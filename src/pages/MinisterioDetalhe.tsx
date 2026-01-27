@@ -33,6 +33,10 @@ import bannerMinisterioInfantilMobile2x from "@/assets/banner-ministerio-infanti
 import bannerMinisterioInfantilMobileFinal from "@/assets/banner-ministerio-infantil-mobile-final.jpg";
 import bannerMinisterioInfantilMobileFinal2x from "@/assets/banner-ministerio-infantil-mobile-final-2x.jpg";
 
+import infantilExtra01 from "@/assets/infantil-extra-01.jpg";
+import infantilExtra02 from "@/assets/infantil-extra-02.jpg";
+import infantilExtra03 from "@/assets/infantil-extra-03.jpg";
+
 function BulletList({ items }: { items?: string[] }) {
   if (!items?.length) return null;
   return (
@@ -114,7 +118,16 @@ export default function MinisterioDetalhe() {
       ? scrapedImages[hashString(ministerio.slug) % scrapedImages.length]
       : undefined;
   const heroSrc = isInfantil ? bannerMinisterioInfantilCrop : pickedHero || ministerio.imagem;
-  const lightboxImages = useMemo(() => galleryImages, [galleryImages]);
+
+  const infantilExtraImages = useMemo(() => {
+    if (!isInfantil) return [] as string[];
+    return [infantilExtra01, infantilExtra02, infantilExtra03].filter(Boolean);
+  }, [isInfantil]);
+
+  const lightboxImages = useMemo(
+    () => (isInfantil ? [...infantilExtraImages, ...galleryImages] : galleryImages),
+    [galleryImages, infantilExtraImages, isInfantil],
+  );
 
   if (!ministerio) {
     return (
@@ -305,7 +318,7 @@ export default function MinisterioDetalhe() {
                         <button
                           type="button"
                           className="group relative block w-full overflow-hidden rounded-md border border-border bg-muted/60"
-                          onClick={() => setLightboxIndex(idx)}
+                          onClick={() => setLightboxIndex((isInfantil ? infantilExtraImages.length : 0) + idx)}
                           aria-label="Abrir imagem em zoom"
                         >
                           <img
@@ -459,6 +472,46 @@ export default function MinisterioDetalhe() {
                       </p>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {isInfantil && infantilExtraImages.length > 0 && (
+            <div className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="font-display uppercase tracking-[0.12em]">Momentos</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Carousel opts={{ align: "start", dragFree: true }} className="relative">
+                    <CarouselContent className="-ml-3">
+                      {infantilExtraImages.map((src, idx) => (
+                        <CarouselItem
+                          key={`${src}-${idx}`}
+                          className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
+                        >
+                          <button
+                            type="button"
+                            className="group relative block w-full overflow-hidden rounded-md border border-border bg-muted/60"
+                            onClick={() => setLightboxIndex(idx)}
+                            aria-label="Abrir imagem em zoom"
+                          >
+                            <img
+                              src={src}
+                              alt={`Foto do Ministério Infantil (${idx + 1})`}
+                              className="aspect-square h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          </button>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+
+                    <CarouselPrevious className="-left-4 hidden md:inline-flex" />
+                    <CarouselNext className="-right-4 hidden md:inline-flex" />
+                  </Carousel>
                 </CardContent>
               </Card>
             </div>
