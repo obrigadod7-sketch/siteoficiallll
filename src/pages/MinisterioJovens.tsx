@@ -6,9 +6,23 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
-// Imagem provisória (vou trocar pela sua assim que você enviar)
-import heroPlaceholder from "@/assets/hero-oficial-2-1.png";
+// Banner + galeria (enviados pelo usuário)
+import jovensBanner from "@/assets/jovens-banner.jpg";
+import jovens01 from "@/assets/jovens-01.jpg";
+import jovens02 from "@/assets/jovens-02.jpg";
+import jovens03 from "@/assets/jovens-03.jpg";
+import jovens04 from "@/assets/jovens-04.jpg";
+import jovens05 from "@/assets/jovens-05.jpg";
+import jovens06 from "@/assets/jovens-06.jpg";
+import jovens07 from "@/assets/jovens-07.jpg";
 
 function BulletList({ items }: { items: string[] }) {
   return (
@@ -25,6 +39,8 @@ export default function MinisterioJovens() {
     document.title = "Ministério dos Jovens | Missão Evangélica Lusitana";
   }, []);
 
+  const galleryImages = [jovens01, jovens02, jovens03, jovens04, jovens05, jovens06, jovens07];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ElementorHeader />
@@ -34,8 +50,8 @@ export default function MinisterioJovens() {
         <header className="relative min-h-[320px] sm:min-h-[420px]">
           <div className="absolute inset-0">
             <img
-              src={heroPlaceholder}
-              alt="Encontro do Ministério dos Jovens"
+               src={jovensBanner}
+               alt="Banner do Ministério dos Jovens"
               className="h-full w-full object-cover"
               loading="eager"
               decoding="async"
@@ -128,6 +144,38 @@ export default function MinisterioJovens() {
           </div>
 
           <div className="mt-6">
+             <Card>
+               <CardHeader>
+                 <CardTitle className="font-display uppercase tracking-[0.12em]">Galeria</CardTitle>
+               </CardHeader>
+               <CardContent>
+                 <Carousel opts={{ align: "start", dragFree: true }} className="relative">
+                   <CarouselContent className="-ml-3">
+                     {galleryImages.map((src, idx) => (
+                       <CarouselItem
+                         key={`${src}-${idx}`}
+                         className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
+                       >
+                         <div className="relative w-full overflow-hidden rounded-md border border-border bg-muted/60">
+                           <img
+                             src={src}
+                             alt={`Foto do Ministério dos Jovens (${idx + 1})`}
+                             className="aspect-square h-full w-full object-cover"
+                             loading="lazy"
+                             decoding="async"
+                           />
+                         </div>
+                       </CarouselItem>
+                     ))}
+                   </CarouselContent>
+
+                   <CarouselPrevious className="-left-4 hidden md:inline-flex" />
+                   <CarouselNext className="-right-4 hidden md:inline-flex" />
+                 </Carousel>
+               </CardContent>
+             </Card>
+
+             <div className="mt-6">
             <Card>
               <CardHeader>
                 <CardTitle className="font-display uppercase tracking-[0.12em]">Versículo bíblico</CardTitle>
@@ -137,6 +185,7 @@ export default function MinisterioJovens() {
                 <p className="mt-2 text-sm font-semibold text-foreground">1 Timóteo 4:12</p>
               </CardContent>
             </Card>
+             </div>
           </div>
         </section>
       </main>
