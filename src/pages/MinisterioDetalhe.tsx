@@ -166,7 +166,7 @@ export default function MinisterioDetalhe() {
             (isCasais
               ? "min-h-[360px] md:min-h-[440px]"
               : isInfantil
-                ? "min-h-[420px] sm:min-h-[520px] lg:min-h-[80vh]"
+                ? "min-h-[360px] sm:min-h-[440px] lg:min-h-[560px]"
                 : "")
           }
         >
