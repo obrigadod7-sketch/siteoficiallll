@@ -26,6 +26,7 @@ import { KidsSignupForm } from "@/components/site/KidsSignupForm";
 import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
 import bannerMinisterioInfantilMelhorado from "@/assets/banner-ministerio-infantil-melhorado.jpg";
 import bannerMinisterioInfantilMelhorado2x from "@/assets/banner-ministerio-infantil-melhorado-2x.jpg";
+import texturePaperFine from "@/assets/texture-paper-fine.png";
 
 import infantilExtra01 from "@/assets/infantil-extra-01.jpg";
 import infantilExtra02 from "@/assets/infantil-extra-02.jpg";
@@ -208,6 +209,20 @@ export default function MinisterioDetalhe() {
                 loading="lazy"
               />
             )}
+
+             {/* Textura (somente Infantil): camada sutil para igualar o acabamento da referência sem mexer na imagem/rostos */}
+             {isInfantil && (
+               <div
+                 aria-hidden
+                 className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-soft-light"
+                 style={{
+                   backgroundImage: `url(${texturePaperFine})`,
+                   backgroundRepeat: "repeat",
+                   backgroundSize: "520px 520px",
+                 }}
+               />
+             )}
+
             <div
               className={
                 "absolute inset-0 bg-gradient-to-b " +
