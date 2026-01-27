@@ -140,7 +140,7 @@ export default function MinisterioDetalhe() {
       <div className="min-h-screen bg-background text-foreground">
         <ElementorHeader />
         <main>
-          <section className="mx-auto w-full max-w-[1100px] px-6">
+          <section className="mx-auto w-full max-w-[1100px] px-6 xl:max-w-[1400px]">
             <h1 className="font-display text-2xl uppercase tracking-[0.14em]">Ministério não encontrado</h1>
             <p className="mt-2 text-muted-foreground">Verifique o link e tente novamente.</p>
             <div className="mt-6">
@@ -218,7 +218,7 @@ export default function MinisterioDetalhe() {
             />
           </div>
 
-          <div className="relative mx-auto w-full max-w-[1100px] px-6 py-14 md:py-20">
+          <div className="relative mx-auto w-full max-w-[1100px] px-6 py-14 md:py-20 xl:max-w-[1400px]">
             <Badge variant="secondary">Ministério</Badge>
             <h1 className="mt-3 font-display text-3xl uppercase tracking-[0.14em] md:text-5xl">
               {infantil?.titulo ?? ministerio.titulo}
@@ -305,7 +305,7 @@ export default function MinisterioDetalhe() {
         </section>
 
         {galleryImages.length > 0 && (
-          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10">
+          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10 xl:max-w-[1400px]">
             <Card>
               <CardHeader>
                 <CardTitle className="font-display uppercase tracking-[0.12em]">Galeria</CardTitle>
@@ -344,7 +344,7 @@ export default function MinisterioDetalhe() {
           </section>
         )}
 
-        <section className="mx-auto w-full max-w-[1100px] px-6 pb-16">
+        <section className="mx-auto w-full max-w-[1100px] px-6 pb-16 xl:max-w-[1400px]">
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
