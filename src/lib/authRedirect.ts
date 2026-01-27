@@ -3,7 +3,8 @@
 
 export function getResetPasswordRedirectTo() {
   const host = window.location.hostname;
-  const path = "/reset-password";
+  // Use a callback route to reliably capture the auth code/token before showing the reset UI.
+  const path = "/auth/callback";
 
   // Public preview URL for this project (supports SPA routing).
   // Using the published URL can result in 404 on deep links depending on host config.
