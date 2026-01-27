@@ -305,7 +305,7 @@ export default function MinisterioDetalhe() {
         </section>
 
         {galleryImages.length > 0 && (
-          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10">
+          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10 xl:max-w-[1400px]">
             <Card>
               <CardHeader>
                 <CardTitle className="font-display uppercase tracking-[0.12em]">Galeria</CardTitle>
