@@ -18,6 +18,7 @@ import Login from "./pages/auth/Login";
 import AdminSetup from "./pages/auth/AdminSetup";
 import ResetPassword from "./pages/auth/ResetPassword";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import AuthCallback from "./pages/auth/AuthCallback";
 import KidsDashboardLayout from "./pages/kids/KidsDashboardLayout";
 import KidsDashboardHome from "./pages/kids/KidsDashboardHome";
 import KidsChildrenPage from "./pages/kids/KidsChildrenPage";
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/setup-admin" element={<AdminSetup />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/reset-password" element={<ResetPassword />} />
 
             {/* Site dashboard */}
