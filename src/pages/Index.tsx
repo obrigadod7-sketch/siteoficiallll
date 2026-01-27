@@ -1,5 +1,4 @@
-import heroBanner1x from "@/assets/hero-oficial-2-1-claro.png";
-import heroBanner2x from "@/assets/hero-oficial-2-1-claro-hq.png";
+import heroBanner from "@/assets/oficial-2-1.png";
 import pastoralImage from "@/assets/familia-pastoral.png";
 import bgCultos from "@/assets/bg-cultos-ao-vivo-celulas-match.jpg";
 import bgCelulas from "@/assets/bg-celulas-nas-casas-cultos-match.jpg";
@@ -28,7 +27,7 @@ const Index = () => {
   const PhotoOverlay = () => (
     <>
       {/* OVERLAY AZUL (deve ficar acima da imagem e abaixo da textura) */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-10 bg-mel-banner3/78 mix-blend-multiply" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-10 bg-mel-banner3/65 mix-blend-multiply" />
     </>
   );
 
@@ -53,30 +52,23 @@ const Index = () => {
             * Mobile/Tablet: keep the whole banner (contain) and fill the remaining area with a blurred cover background
             * to avoid black letterbox bars.
             */}
-            <picture>
-              <source srcSet={`${heroBanner1x} 1x, ${heroBanner2x} 2x`} />
-              <img
-                src={heroBanner1x}
-                alt=""
-                aria-hidden
-                className="absolute inset-0 h-full w-full bg-mel-banner3 object-cover object-center opacity-70 blur-xl scale-110 lg:hidden"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-              />
-            </picture>
-
-            <picture>
-              <source srcSet={`${heroBanner1x} 1x, ${heroBanner2x} 2x`} />
-              <img
-                src={heroBanner1x}
-                alt="Banner da Missão Evangélica Lusitana"
-                className="absolute inset-0 h-full w-full object-contain object-center saturate-75 contrast-95 brightness-105 grayscale-[10%] md:object-cover lg:object-cover"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-              />
-            </picture>
+           <img
+             src={heroBanner}
+             alt=""
+             aria-hidden
+             className="absolute inset-0 h-full w-full bg-mel-banner3 object-cover object-center opacity-70 blur-xl scale-110 lg:hidden"
+             loading="eager"
+             decoding="async"
+             fetchPriority="high"
+           />
+           <img
+             src={heroBanner}
+             alt="Banner da Missão Evangélica Lusitana"
+              className="absolute inset-0 h-full w-full object-contain object-center saturate-75 contrast-95 brightness-105 grayscale-[10%] md:object-cover lg:object-cover"
+             loading="eager"
+             decoding="async"
+             fetchPriority="high"
+           />
 
           {/* overlay mais claro (mantém a identidade azul sem escurecer) */}
           <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-mel-overlay/30 to-mel-overlay/30" />
@@ -168,20 +160,20 @@ const Index = () => {
                 loading="lazy"
                 decoding="async"
                 // Preencher o bloco (sem sobrar “bordas")
-                className="absolute inset-0 z-0 h-full w-full object-cover object-center opacity-70 blur-[1px] filter saturate-[0.55] contrast-[0.75] brightness-[0.92]"
+                className="absolute inset-0 z-0 h-full w-full object-cover object-center filter saturate-[0.8] contrast-[0.9] brightness-[0.95]"
               />
 
               {/* OVERLAY AZUL */}
               <PhotoOverlay />
 
               {/* CONTEÚDO */}
-                <div className="relative z-30 flex min-h-[220px] flex-col items-center justify-center gap-5 px-6 text-center sm:min-h-[240px] md:min-h-[280px] md:px-8">
-                <h2 className="font-display text-[clamp(30px,4.2vw,52px)] font-semibold uppercase leading-[1.05] tracking-[0.11em] text-mel-ice drop-shadow-md animate-fade-in">
+               <div className="relative z-30 flex min-h-[220px] flex-col items-center justify-center gap-4 px-6 text-center sm:min-h-[240px] md:min-h-[280px] md:px-8">
+                <h2 className="font-display text-[24px] font-semibold uppercase tracking-[0.11em] text-mel-ice drop-shadow-md animate-fade-in md:text-[26px]">
                   <a href="/cultos-ao-vivo">{t("home_cultos")}</a>
                 </h2>
 
                 <a
-                  className="inline-flex h-12 min-w-[220px] items-center justify-center rounded-md bg-card/80 px-8 font-display text-[12px] font-semibold uppercase tracking-[0.32em] text-foreground shadow-elev ring-1 ring-border backdrop-blur-md"
+                  className="inline-flex h-10 min-w-[180px] items-center justify-center rounded-md bg-card/75 px-7 font-display text-[10px] font-semibold uppercase tracking-[0.32em] text-foreground shadow-elev ring-1 ring-border backdrop-blur-md"
                   href="/cultos-ao-vivo"
                 >
                   {t("home_informacoes")}
@@ -204,20 +196,20 @@ const Index = () => {
                 alt="Células nas casas"
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 z-0 h-full w-full object-cover object-center opacity-70 blur-[1px] filter saturate-[0.55] contrast-[0.75] brightness-[0.92]"
+                className="absolute inset-0 z-0 h-full w-full object-cover object-center filter saturate-[0.8] contrast-[0.9] brightness-[0.95]"
               />
 
               {/* OVERLAY AZUL */}
               <PhotoOverlay />
 
               {/* CONTEÚDO */}
-                <div className="relative z-30 flex min-h-[220px] flex-col items-center justify-center gap-5 px-6 text-center sm:min-h-[240px] md:min-h-[280px] md:px-8">
-                <h2 className="font-display text-[clamp(30px,4.2vw,52px)] font-semibold uppercase leading-[1.05] tracking-[0.11em] text-mel-ice drop-shadow-md animate-fade-in">
+               <div className="relative z-30 flex min-h-[220px] flex-col items-center justify-center gap-4 px-6 text-center sm:min-h-[240px] md:min-h-[280px] md:px-8">
+                <h2 className="font-display text-[24px] font-semibold uppercase tracking-[0.11em] text-mel-ice drop-shadow-md animate-fade-in md:text-[26px]">
                   <a href="https://missionevangeliquelusitana.com/celular-nas-casas/">{t("home_celulas")}</a>
                 </h2>
 
                 <a
-                  className="inline-flex h-12 min-w-[220px] items-center justify-center rounded-md bg-card/80 px-8 font-display text-[12px] font-semibold uppercase tracking-[0.32em] text-foreground shadow-elev ring-1 ring-border backdrop-blur-md"
+                  className="inline-flex h-10 min-w-[180px] items-center justify-center rounded-md bg-card/75 px-7 font-display text-[10px] font-semibold uppercase tracking-[0.32em] text-foreground shadow-elev ring-1 ring-border backdrop-blur-md"
                   href="https://missionevangeliquelusitana.com/celular-nas-casas/"
                 >
                   {t("home_informacoes")}
