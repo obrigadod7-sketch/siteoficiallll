@@ -20,6 +20,7 @@ export function ElementorHeader() {
     { href: "/cultos-ao-vivo", label: t("nav_cultos") },
     { href: "/missoes", label: t("nav_missoes") },
     { href: "/ministerios", label: t("nav_ministerios") },
+    { href: "https://missionevangeliquelusitana.com/pedidos-de-oracao/", label: t("nav_oracao") },
     { href: "/ministerios/ministerio-infantil", label: t("nav_infantil") },
     { href: "/kids/dashboard", label: t("nav_dashboard_kids") },
     { href: "/cantina", label: t("nav_cantina") },
