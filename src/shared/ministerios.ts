@@ -14,7 +14,7 @@ import casais06 from "@/assets/casais-06-treated.jpg";
 import casais07 from "@/assets/casais-07-treated.jpg";
 import casais08 from "@/assets/casais-08-treated.jpg";
 
-import bannerMinisterioInfantilHQ from "@/assets/banner-ministerio-infantil-hq.jpg";
+import bannerMinisterioInfantilMelhorado from "@/assets/banner-ministerio-infantil-melhorado.jpg";
 
 import ministerioInfantil01 from "@/assets/ministerio-infantil-01.jpg";
 import ministerioInfantil02 from "@/assets/ministerio-infantil-02.jpg";
@@ -207,7 +207,7 @@ export const MINISTERIOS: Ministerio[] = [
     descricao:
       "Um ministério dedicado a receber crianças e famílias com acolhimento, discipulado e responsabilidade, apoiando os pais na formação cristã.",
     // Conteúdo completo (PT/EN/FR) é exibido via i18n na página de detalhe.
-    imagem: bannerMinisterioInfantilHQ,
+    imagem: bannerMinisterioInfantilMelhorado,
     galeria: [ministerioInfantil01, ministerioInfantil02, ministerioInfantil03],
   },
   {
