@@ -25,6 +25,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { KidsSignupForm } from "@/components/site/KidsSignupForm";
 import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
 import bannerMinisterioInfantilMelhorado from "@/assets/banner-ministerio-infantil-melhorado.jpg";
+import bannerMinisterioInfantilMelhorado2x from "@/assets/banner-ministerio-infantil-melhorado-2x.jpg";
 
 import infantilExtra01 from "@/assets/infantil-extra-01.jpg";
 import infantilExtra02 from "@/assets/infantil-extra-02.jpg";
@@ -174,15 +175,15 @@ export default function MinisterioDetalhe() {
               <picture>
                 <source
                   media="(max-width: 639px)"
-                  srcSet={bannerMinisterioInfantilMelhorado}
+                  srcSet={`${bannerMinisterioInfantilMelhorado} 1x, ${bannerMinisterioInfantilMelhorado2x} 2x`}
                 />
                 <source
                   media="(max-width: 1023px)"
-                  srcSet={bannerMinisterioInfantilMelhorado}
+                  srcSet={`${bannerMinisterioInfantilMelhorado} 1x, ${bannerMinisterioInfantilMelhorado2x} 2x`}
                 />
-                <source srcSet={bannerMinisterioInfantilMelhorado} />
+                <source srcSet={`${bannerMinisterioInfantilMelhorado} 1x, ${bannerMinisterioInfantilMelhorado2x} 2x`} />
                 <img
-                  src={heroSrc}
+                  src={bannerMinisterioInfantilMelhorado}
                   alt={`Imagem do ministério ${ministerio.titulo}`}
                   className={
                     "h-full w-full " +
