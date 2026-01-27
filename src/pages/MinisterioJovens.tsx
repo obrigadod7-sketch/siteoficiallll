@@ -20,7 +20,6 @@ import jovensBanner from "@/assets/jovens-banner.jpg";
 import jovens01 from "@/assets/jovens-01.jpg";
 import jovens02 from "@/assets/jovens-02.jpg";
 import jovens03 from "@/assets/jovens-03.jpg";
-import jovens04 from "@/assets/jovens-04.jpg";
 import jovens05 from "@/assets/jovens-05.jpg";
 import jovens06 from "@/assets/jovens-06.jpg";
 import jovens07 from "@/assets/jovens-07.jpg";
@@ -40,7 +39,7 @@ export default function MinisterioJovens() {
     document.title = "Ministério dos Jovens | Missão Evangélica Lusitana";
   }, []);
 
-  const galleryImages = useMemo(() => [jovens01, jovens02, jovens03, jovens04, jovens05, jovens06, jovens07], []);
+  const galleryImages = useMemo(() => [jovens01, jovens02, jovens03, jovens05, jovens06, jovens07], []);
   const lightboxImages = useMemo(() => [jovensBanner, ...galleryImages], [galleryImages]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
