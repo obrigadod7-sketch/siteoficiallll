@@ -26,7 +26,6 @@ import { KidsSignupForm } from "@/components/site/KidsSignupForm";
 import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
 import bannerMinisterioInfantilMelhorado from "@/assets/banner-ministerio-infantil-melhorado.jpg";
 import bannerMinisterioInfantilMelhorado2x from "@/assets/banner-ministerio-infantil-melhorado-2x.jpg";
-import texturePaperFine from "@/assets/texture-paper-fine.png";
 
 import infantilExtra01 from "@/assets/infantil-extra-01.jpg";
 import infantilExtra02 from "@/assets/infantil-extra-02.jpg";
@@ -167,7 +166,7 @@ export default function MinisterioDetalhe() {
             (isCasais
               ? "min-h-[360px] md:min-h-[440px]"
               : isInfantil
-                ? "min-h-[360px] sm:min-h-[440px] lg:min-h-[560px]"
+                ? "min-h-[420px] sm:min-h-[520px] lg:min-h-[80vh]"
                 : "")
           }
         >
@@ -209,24 +208,6 @@ export default function MinisterioDetalhe() {
                 loading="lazy"
               />
             )}
-
-             {/* Textura (somente Infantil): camada sutil para igualar o acabamento da referência sem mexer na imagem/rostos */}
-             {isInfantil && (
-               <div
-                 aria-hidden
-                 className="pointer-events-none absolute inset-0 opacity-[0.10] mix-blend-overlay"
-                 style={{
-                   backgroundImage: `url(${texturePaperFine})`,
-                   backgroundRepeat: "repeat",
-                   // Maior e mais suave para evitar padrão repetitivo evidente
-                   backgroundSize: "1200px 1200px",
-                   backgroundPosition: "center",
-                   // Ajustes apenas na textura (não altera os rostos/cores da foto)
-                   filter: "contrast(1.18) brightness(0.96)",
-                 }}
-               />
-             )}
-
             <div
               className={
                 "absolute inset-0 bg-gradient-to-b " +
