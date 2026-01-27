@@ -1,7 +1,5 @@
 import heroBanner from "@/assets/oficial-2-1.png";
 import pastoralImage from "@/assets/familia-pastoral.png";
-import bgCultos from "@/assets/bg-cultos-ao-vivo-celulas-match.jpg";
-import bgCelulas from "@/assets/bg-celulas-nas-casas-cultos-match.jpg";
 import paperTexture from "@/assets/texture-paper-fine.png";
 import { ElementorHeader } from "@/components/site/ElementorHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -153,14 +151,10 @@ const Index = () => {
           <div className="grid w-full items-stretch md:grid-cols-2">
             {/* Coluna 1 - Cultos */}
             <div className="relative overflow-hidden bg-mel-banner3">
-              {/* IMAGEM (base) */}
-              <img
-                src={bgCultos}
-                alt="Cultos ao vivo"
-                loading="lazy"
-                decoding="async"
-                // Preencher o bloco (sem sobrar “bordas")
-                className="absolute inset-0 z-0 h-full w-full object-cover object-center filter saturate-[0.8] contrast-[0.9] brightness-[0.95]"
+              {/* Fundo sem imagem (mantém identidade visual) */}
+              <div
+                aria-hidden
+                className="absolute inset-0 z-0 bg-gradient-to-br from-mel-banner2/60 via-mel-banner3/85 to-mel-banner1/60"
               />
 
               {/* OVERLAY AZUL */}
@@ -190,13 +184,10 @@ const Index = () => {
 
             {/* Coluna 2 - Células */}
             <div className="relative overflow-hidden bg-mel-banner3">
-              {/* IMAGEM (base) — igual ao Cultos: ocupa 100% do bloco */}
-              <img
-                src={bgCelulas}
-                alt="Células nas casas"
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 z-0 h-full w-full object-cover object-center filter saturate-[0.8] contrast-[0.9] brightness-[0.95]"
+              {/* Fundo sem imagem (mantém identidade visual) */}
+              <div
+                aria-hidden
+                className="absolute inset-0 z-0 bg-gradient-to-br from-mel-banner2/60 via-mel-banner3/85 to-mel-banner1/60"
               />
 
               {/* OVERLAY AZUL */}
