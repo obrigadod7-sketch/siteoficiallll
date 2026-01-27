@@ -186,7 +186,8 @@ export default function MinisterioDetalhe() {
                   src={bannerMinisterioInfantilMelhorado}
                   alt={`Imagem do ministério ${ministerio.titulo}`}
                   className={
-                    "h-full w-full " +
+                    // Mais brilho/vida no banner (sem alterar a paleta do site)
+                    "h-full w-full brightness-[1.08] contrast-[1.04] saturate-[1.06] " +
                     // Preenche mais a tela (pode cortar um pouco) conforme solicitado
                     "object-cover"
                   }
@@ -211,7 +212,7 @@ export default function MinisterioDetalhe() {
               className={
                 "absolute inset-0 bg-gradient-to-b " +
                 (isInfantil
-                  ? "from-background/0 via-background/40 to-background"
+                  ? "from-background/0 via-background/25 to-background"
                   : "from-background/10 via-background/65 to-background")
               }
             />
