@@ -24,8 +24,8 @@ import CasaisMinisterio from "@/pages/CasaisMinisterio";
 import { useI18n } from "@/i18n/I18nProvider";
 import { KidsSignupForm } from "@/components/site/KidsSignupForm";
 import responsavelInfantil from "@/assets/responsavel-ministerio-infantil-cutout.png";
-import bannerMinisterioInfantilMelhorado from "@/assets/banner-ministerio-infantil-melhorado.jpg";
-import bannerMinisterioInfantilMelhorado2x from "@/assets/banner-ministerio-infantil-melhorado-2x.jpg";
+import bannerMinisterioInfantilRealista from "@/assets/banner-ministerio-infantil-realista.jpg";
+import bannerMinisterioInfantilRealista2x from "@/assets/banner-ministerio-infantil-realista-2x.jpg";
 
 import infantilExtra01 from "@/assets/infantil-extra-01.jpg";
 import infantilExtra02 from "@/assets/infantil-extra-02.jpg";
@@ -115,7 +115,7 @@ export default function MinisterioDetalhe() {
     scrapedImages.length > 0 && ministerio
       ? scrapedImages[hashString(ministerio.slug) % scrapedImages.length]
       : undefined;
-  const heroSrc = isInfantil ? bannerMinisterioInfantilMelhorado : pickedHero || ministerio.imagem;
+  const heroSrc = isInfantil ? bannerMinisterioInfantilRealista : pickedHero || ministerio.imagem;
 
   const infantilExtraImages = useMemo(() => {
     if (!isInfantil) return [] as string[];
@@ -175,19 +175,19 @@ export default function MinisterioDetalhe() {
               <picture>
                 <source
                   media="(max-width: 639px)"
-                  srcSet={`${bannerMinisterioInfantilMelhorado} 1x, ${bannerMinisterioInfantilMelhorado2x} 2x`}
+                  srcSet={`${bannerMinisterioInfantilRealista} 1x, ${bannerMinisterioInfantilRealista2x} 2x`}
                 />
                 <source
                   media="(max-width: 1023px)"
-                  srcSet={`${bannerMinisterioInfantilMelhorado} 1x, ${bannerMinisterioInfantilMelhorado2x} 2x`}
+                  srcSet={`${bannerMinisterioInfantilRealista} 1x, ${bannerMinisterioInfantilRealista2x} 2x`}
                 />
-                <source srcSet={`${bannerMinisterioInfantilMelhorado} 1x, ${bannerMinisterioInfantilMelhorado2x} 2x`} />
+                <source srcSet={`${bannerMinisterioInfantilRealista} 1x, ${bannerMinisterioInfantilRealista2x} 2x`} />
                 <img
-                  src={bannerMinisterioInfantilMelhorado}
+                  src={bannerMinisterioInfantilRealista}
                   alt={`Imagem do ministério ${ministerio.titulo}`}
                   className={
-                    // Mais brilho/vida no banner (sem alterar a paleta do site)
-                    "h-full w-full brightness-[1.08] contrast-[1.04] saturate-[1.06] " +
+                    // Realismo: um toque de brilho, mas sem exagerar em contraste/saturação
+                    "h-full w-full brightness-[1.06] contrast-[1.02] saturate-[1.03] " +
                     // Preenche mais a tela (pode cortar um pouco) conforme solicitado
                     "object-cover"
                   }
@@ -305,7 +305,7 @@ export default function MinisterioDetalhe() {
         </section>
 
         {galleryImages.length > 0 && (
-          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10 xl:max-w-[1400px]">
+          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10">
             <Card>
               <CardHeader>
                 <CardTitle className="font-display uppercase tracking-[0.12em]">Galeria</CardTitle>
