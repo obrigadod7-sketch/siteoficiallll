@@ -99,19 +99,50 @@ export function ElementorHeader() {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[320px]">
-              <SheetHeader>
-                <SheetTitle className="font-display">{t("menu")}</SheetTitle>
-              </SheetHeader>
-              <div className="mt-4">
-                <LanguageSwitcher />
-              </div>
-              <div className="mt-6 grid gap-2">
-                {nav.map((item) => (
-                  <Button key={item.href} asChild variant="soft" className="justify-start">
-                    {item.href.startsWith("/") ? <Link to={item.href}>{item.label}</Link> : <a href={item.href}>{item.label}</a>}
-                  </Button>
-                ))}
+            <SheetContent
+              side="right"
+              className={
+                "inset-0 h-[100dvh] w-screen max-w-none border-0 bg-primary p-0 text-primary-foreground " +
+                // Reposiciona e estiliza o botão X padrão do Sheet (para ficar como no print)
+                "[&>button]:left-1/2 [&>button]:right-auto [&>button]:top-3 [&>button]:h-12 [&>button]:w-12 [&>button]:-translate-x-1/2 " +
+                "[&>button]:rounded-md [&>button]:bg-card [&>button]:opacity-100 [&>button]:shadow-elev " +
+                "[&>button>svg]:h-7 [&>button>svg]:w-7 [&>button>svg]:text-foreground"
+              }
+            >
+              <div className="mx-auto flex h-full w-full max-w-[420px] flex-col px-6 pb-10 pt-16">
+                <SheetHeader className="items-center text-center">
+                  <SheetTitle className="font-display uppercase tracking-[0.18em] text-primary-foreground">
+                    {t("menu")}
+                  </SheetTitle>
+                </SheetHeader>
+
+                <div className="mt-5 flex justify-center">
+                  <LanguageSwitcher />
+                </div>
+
+                <nav className="mt-6 flex-1 overflow-y-auto" aria-label="Menu">
+                  <ul className="grid gap-3">
+                    {nav.map((item) => (
+                      <li key={item.href}>
+                        {item.href.startsWith("/") ? (
+                          <Link
+                            to={item.href}
+                            className="block w-full rounded-none border border-primary/30 bg-card px-6 py-5 text-center font-display text-sm font-semibold uppercase tracking-[0.22em] text-foreground"
+                          >
+                            {item.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={item.href}
+                            className="block w-full rounded-none border border-primary/30 bg-card px-6 py-5 text-center font-display text-sm font-semibold uppercase tracking-[0.22em] text-foreground"
+                          >
+                            {item.label}
+                          </a>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
               </div>
             </SheetContent>
           </Sheet>
