@@ -214,11 +214,15 @@ export default function MinisterioDetalhe() {
              {isInfantil && (
                <div
                  aria-hidden
-                 className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-soft-light"
+                 className="pointer-events-none absolute inset-0 opacity-[0.10] mix-blend-overlay"
                  style={{
                    backgroundImage: `url(${texturePaperFine})`,
                    backgroundRepeat: "repeat",
-                   backgroundSize: "520px 520px",
+                   // Maior e mais suave para evitar padrão repetitivo evidente
+                   backgroundSize: "1200px 1200px",
+                   backgroundPosition: "center",
+                   // Ajustes apenas na textura (não altera os rostos/cores da foto)
+                   filter: "contrast(1.18) brightness(0.96)",
                  }}
                />
              )}
