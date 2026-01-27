@@ -208,7 +208,7 @@ export default function MinisterioJovens() {
            <DialogContent className="max-w-[92vw] p-0 sm:max-w-[980px]">
              {lightboxIndex !== null && (
                <div className="relative">
-                 <div className="relative aspect-[4/3] w-full bg-muted">
+                 <div className="grid max-h-[82vh] place-items-center bg-muted p-2">
                    <img
                      src={lightboxImages[lightboxIndex]}
                      alt={
@@ -216,7 +216,7 @@ export default function MinisterioJovens() {
                          ? "Banner do Ministério dos Jovens"
                          : `Foto do Ministério dos Jovens (${lightboxIndex})`
                      }
-                     className="h-full w-full object-contain"
+                     className="max-h-[80vh] w-auto max-w-[92vw] object-contain"
                      decoding="async"
                    />
                  </div>
