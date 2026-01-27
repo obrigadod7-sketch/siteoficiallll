@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ElementorHeader } from "@/components/site/ElementorHeader";
@@ -13,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 // Banner + galeria (enviados pelo usuário)
 import jovensBanner from "@/assets/jovens-banner.jpg";
@@ -39,7 +40,9 @@ export default function MinisterioJovens() {
     document.title = "Ministério dos Jovens | Missão Evangélica Lusitana";
   }, []);
 
-  const galleryImages = [jovens01, jovens02, jovens03, jovens04, jovens05, jovens06, jovens07];
+  const galleryImages = useMemo(() => [jovens01, jovens02, jovens03, jovens04, jovens05, jovens06, jovens07], []);
+  const lightboxImages = useMemo(() => [jovensBanner, ...galleryImages], [galleryImages]);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -49,14 +52,21 @@ export default function MinisterioJovens() {
         {/* HERO */}
         <header className="relative min-h-[320px] sm:min-h-[420px]">
           <div className="absolute inset-0">
-            <img
-               src={jovensBanner}
-               alt="Banner do Ministério dos Jovens"
-              className="h-full w-full object-cover"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-            />
+             <button
+               type="button"
+               className="absolute inset-0"
+               onClick={() => setLightboxIndex(0)}
+               aria-label="Abrir banner em tamanho maior"
+             >
+               <img
+                 src={jovensBanner}
+                 alt="Banner do Ministério dos Jovens"
+                 className="h-full w-full object-cover lg:object-contain"
+                 loading="eager"
+                 decoding="async"
+                 fetchPriority="high"
+               />
+             </button>
             <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/55 to-background" />
           </div>
 
@@ -156,15 +166,20 @@ export default function MinisterioJovens() {
                          key={`${src}-${idx}`}
                          className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
                        >
-                         <div className="relative w-full overflow-hidden rounded-md border border-border bg-muted/60">
+                         <button
+                           type="button"
+                           className="group relative block w-full overflow-hidden rounded-md border border-border bg-muted/60"
+                           onClick={() => setLightboxIndex(idx + 1)}
+                           aria-label="Abrir imagem em zoom"
+                         >
                            <img
                              src={src}
                              alt={`Foto do Ministério dos Jovens (${idx + 1})`}
-                             className="aspect-square h-full w-full object-cover"
+                             className="aspect-square h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                              loading="lazy"
                              decoding="async"
                            />
-                         </div>
+                         </button>
                        </CarouselItem>
                      ))}
                    </CarouselContent>
@@ -188,6 +203,52 @@ export default function MinisterioJovens() {
              </div>
           </div>
         </section>
+
+         {/* LIGHTBOX (zoom) */}
+         <Dialog open={lightboxIndex !== null} onOpenChange={(open) => (!open ? setLightboxIndex(null) : null)}>
+           <DialogContent className="max-w-[92vw] p-0 sm:max-w-[980px]">
+             {lightboxIndex !== null && (
+               <div className="relative">
+                 <div className="relative aspect-[4/3] w-full bg-muted">
+                   <img
+                     src={lightboxImages[lightboxIndex]}
+                     alt={
+                       lightboxIndex === 0
+                         ? "Banner do Ministério dos Jovens"
+                         : `Foto do Ministério dos Jovens (${lightboxIndex})`
+                     }
+                     className="h-full w-full object-contain"
+                     decoding="async"
+                   />
+                 </div>
+
+                 <div className="flex items-center justify-between gap-2 border-t border-border bg-background p-3">
+                   <Button
+                     type="button"
+                     variant="outline"
+                     onClick={() =>
+                       setLightboxIndex((i) => (i === null ? null : (i - 1 + lightboxImages.length) % lightboxImages.length))
+                     }
+                     disabled={lightboxImages.length <= 1}
+                   >
+                     Anterior
+                   </Button>
+                   <p className="text-xs text-muted-foreground">
+                     {lightboxIndex + 1} / {lightboxImages.length}
+                   </p>
+                   <Button
+                     type="button"
+                     variant="outline"
+                     onClick={() => setLightboxIndex((i) => (i === null ? null : (i + 1) % lightboxImages.length))}
+                     disabled={lightboxImages.length <= 1}
+                   >
+                     Próxima
+                   </Button>
+                 </div>
+               </div>
+             )}
+           </DialogContent>
+         </Dialog>
       </main>
 
       <SiteFooter />
