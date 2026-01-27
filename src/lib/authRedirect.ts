@@ -7,7 +7,7 @@ export function getResetPasswordRedirectTo() {
 
   // Public preview URL for this project (supports SPA routing).
   // Using the published URL can result in 404 on deep links depending on host config.
-  const publicPreviewBase = "https://id-preview--a7811ba7-4976-4442-bee1-35dae247085f.lovable.app";
+  const publicPreviewBase = "https://id-preview--dbd9d9ec-e919-4405-a689-4a0e15bfb60f.lovable.app";
 
   if (host.endsWith("lovableproject.com")) {
     return `${publicPreviewBase}${path}`;

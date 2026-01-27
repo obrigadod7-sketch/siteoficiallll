@@ -12,6 +12,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import { getResetPasswordRedirectTo } from "@/lib/authRedirect";
 
 type Values = {
   email: string;
@@ -51,7 +52,7 @@ export default function ForgotPassword() {
               onSubmit={form.handleSubmit(async (values) => {
                 setSubmitting(true);
                 try {
-                  const redirectTo = `${window.location.origin}/reset-password`;
+                  const redirectTo = getResetPasswordRedirectTo();
                   const { error } = await supabase.auth.resetPasswordForEmail(values.email, { redirectTo });
                   if (error) throw error;
 
