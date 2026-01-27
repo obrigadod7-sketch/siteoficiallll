@@ -305,18 +305,18 @@ export default function MinisterioDetalhe() {
         </section>
 
         {galleryImages.length > 0 && (
-          <section className="w-full pt-6 sm:pt-10">
+          <section className="mx-auto w-full max-w-[1100px] px-6 pt-10">
             <Card>
               <CardHeader>
                 <CardTitle className="font-display uppercase tracking-[0.12em]">Galeria</CardTitle>
               </CardHeader>
               <CardContent>
                 <Carousel opts={{ align: "start", dragFree: true }} className="relative">
-                  <CarouselContent className="-ml-0">
+                  <CarouselContent className="-ml-3">
                     {galleryImages.map((src, idx) => (
                       <CarouselItem
                         key={src}
-                        className="basis-full pl-0"
+                        className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
                       >
                         <button
                           type="button"
@@ -327,7 +327,7 @@ export default function MinisterioDetalhe() {
                           <img
                             src={src}
                             alt={`Foto do ministério ${ministerio.titulo}`}
-                            className="h-[72vh] w-full object-cover transition-transform duration-200 group-hover:scale-[1.01]"
+                            className="aspect-square h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                             loading="lazy"
                             decoding="async"
                           />
@@ -336,8 +336,8 @@ export default function MinisterioDetalhe() {
                     ))}
                   </CarouselContent>
 
-                  <CarouselPrevious className="left-3 hidden md:inline-flex" />
-                  <CarouselNext className="right-3 hidden md:inline-flex" />
+                  <CarouselPrevious className="-left-4 hidden md:inline-flex" />
+                  <CarouselNext className="-right-4 hidden md:inline-flex" />
                 </Carousel>
               </CardContent>
             </Card>
@@ -488,11 +488,11 @@ export default function MinisterioDetalhe() {
                 </CardHeader>
                 <CardContent>
                   <Carousel opts={{ align: "start", dragFree: true }} className="relative">
-                    <CarouselContent className="-ml-0">
+                    <CarouselContent className="-ml-3">
                       {infantilExtraImages.map((src, idx) => (
                         <CarouselItem
                           key={`${src}-${idx}`}
-                          className="basis-full pl-0"
+                          className="basis-[92%] pl-3 sm:basis-[64%] md:basis-[44%] lg:basis-[34%]"
                         >
                           <button
                             type="button"
@@ -503,7 +503,7 @@ export default function MinisterioDetalhe() {
                             <img
                               src={src}
                               alt={`Foto do Ministério Infantil (${idx + 1})`}
-                              className="h-[72vh] w-full object-cover transition-transform duration-200 group-hover:scale-[1.01]"
+                              className="aspect-square h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                               loading="lazy"
                               decoding="async"
                             />
@@ -512,8 +512,8 @@ export default function MinisterioDetalhe() {
                       ))}
                     </CarouselContent>
 
-                    <CarouselPrevious className="left-3 hidden md:inline-flex" />
-                    <CarouselNext className="right-3 hidden md:inline-flex" />
+                    <CarouselPrevious className="-left-4 hidden md:inline-flex" />
+                    <CarouselNext className="-right-4 hidden md:inline-flex" />
                   </Carousel>
                 </CardContent>
               </Card>
