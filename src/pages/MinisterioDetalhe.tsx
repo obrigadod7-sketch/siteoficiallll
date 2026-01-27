@@ -344,7 +344,7 @@ export default function MinisterioDetalhe() {
           </section>
         )}
 
-        <section className="mx-auto w-full max-w-[1100px] px-6 pb-16">
+        <section className="mx-auto w-full max-w-[1100px] px-6 pb-16 xl:max-w-[1400px]">
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
