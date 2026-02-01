@@ -2,7 +2,7 @@ import heroBanner from "@/assets/oficial-2-1.png";
 import pastoralImage from "@/assets/familia-pastoral.png";
 import paperTexture from "@/assets/texture-paper-fine.png";
 import { ElementorHeader } from "@/components/site/ElementorHeader";
-import { PastorPresidentCard } from "@/components/site/PastorPresidentCard";
+import { PastorsCarousel } from "@/components/site/PastorsCarousel";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { useI18n } from "@/i18n/I18nProvider";
 
@@ -223,8 +223,8 @@ const Index = () => {
           <div className="container py-10 text-center">
             <h2 className="font-display text-[2.2em] text-mel-blue800">{t("home_familia_pastoral")}</h2>
 
-            <div className="mx-auto mt-6 max-w-[640px] text-left">
-              <PastorPresidentCard className="shadow-elev" />
+            <div className="mt-6">
+              <PastorsCarousel />
             </div>
 
             <img
