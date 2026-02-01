@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import paperTexture from "@/assets/texture-paper-fine.png";
 import heroImage from "@/assets/bg-cultos-ao-vivo-user-treated-v2.jpg";
@@ -11,10 +11,13 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useI18n } from "@/i18n/I18nProvider";
 
 export default function Missoes() {
   const { t } = useI18n();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = `${t("missions_title")} | Missão Evangélica Lusitana`;
@@ -28,22 +31,31 @@ export default function Missoes() {
     t("missions_value_5"),
   ];
 
-  const africaGallery = [
-    {
-      src: africaKids1,
-      alt: "Crianças reunidas em atividade comunitária durante a missão",
-      // Prefer the larger file when available
-      srcSet: `${africaKids1} 1024w, ${africaKids1Large} 1536w`,
-    },
-    {
-      src: africaKids2,
-      alt: "Momento de comunhão com crianças durante uma ação da missão",
-    },
-    {
-      src: africaTeam1,
-      alt: "Equipe missionária durante apoio e serviço à comunidade",
-    },
-  ];
+  const africaGallery = useMemo(
+    () =>
+      [
+        {
+          src: africaKids1,
+          zoomSrc: africaKids1Large,
+          alt: "Crianças reunidas em atividade comunitária durante a missão",
+          // Prefer the larger file when available
+          srcSet: `${africaKids1} 1024w, ${africaKids1Large} 1536w`,
+        },
+        {
+          src: africaKids2,
+          zoomSrc: africaKids2,
+          alt: "Momento de comunhão com crianças durante uma ação da missão",
+        },
+        {
+          src: africaTeam1,
+          zoomSrc: africaTeam1,
+          alt: "Equipe missionária durante apoio e serviço à comunidade",
+        },
+      ],
+    [],
+  );
+
+  const lightboxImages = useMemo(() => africaGallery.map((g) => g.zoomSrc || g.src), [africaGallery]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -222,42 +234,115 @@ export default function Missoes() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-4 shadow-elev">
-                <div className="grid gap-3">
-                  <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1">
-                    {africaGallery.map((img) => (
-                      <figure key={img.alt} className="group relative overflow-hidden rounded-lg ring-1 ring-border">
+              <Card className="h-fit p-6 shadow-elev ring-1 ring-border">
+                <h3 className="font-display text-[16px] uppercase tracking-[0.22em] text-foreground">Transparência</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Quer ver detalhes do projeto, necessidades atuais e como a ajuda é aplicada? Fale com a liderança e peça
+                  relatórios/atualizações.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row md:flex-col">
+                  <Button asChild variant="secondary">
+                    <a href="/#pastoral">Pedir atualizações</a>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <a href="#contribuir">Ver formas de contribuir</a>
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          {/* Galeria imersiva (imagens maiores) */}
+          <div className="w-full bg-muted/20">
+            <div className="mx-auto w-full max-w-[1400px] px-3 py-10 sm:px-6 md:py-14">
+              <div className="mb-5 flex items-end justify-between gap-4">
+                <div>
+                  <p className="font-display text-[12px] font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+                    Galeria
+                  </p>
+                  <h3 className="mt-2 font-display text-[18px] font-semibold uppercase tracking-[0.12em] text-foreground md:text-[20px]">
+                    Veja de perto o impacto
+                  </h3>
+                </div>
+                <p className="hidden text-xs text-muted-foreground md:block">Clique para ampliar</p>
+              </div>
+
+              <Carousel opts={{ align: "start" }} className="relative">
+                <CarouselContent className="-ml-3">
+                  {africaGallery.map((img, idx) => (
+                    <CarouselItem key={img.alt} className="basis-full pl-3">
+                      <button
+                        type="button"
+                        onClick={() => setLightboxIndex(idx)}
+                        className="group relative block w-full overflow-hidden rounded-xl border border-border bg-background shadow-elev"
+                        aria-label={`Abrir foto em zoom (${idx + 1})`}
+                      >
                         <img
                           src={img.src}
                           srcSet={img.srcSet}
-                          sizes="(max-width: 768px) 100vw, 420px"
+                          sizes="100vw"
                           alt={img.alt}
                           loading="lazy"
                           decoding="async"
-                          className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:h-60"
+                          className="h-[72vh] min-h-[420px] w-full object-cover transition-transform duration-300 group-hover:scale-[1.01] md:min-h-[520px]"
                         />
-                        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/80 to-transparent p-3 text-xs text-primary-foreground/90 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                          {img.alt}
-                        </figcaption>
-                      </figure>
-                    ))}
-                  </div>
+                        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/55 via-transparent to-transparent" />
+                        <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4">
+                          <p className="text-sm font-semibold text-primary-foreground drop-shadow">{img.alt}</p>
+                        </div>
+                      </button>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
 
-                  <div className="rounded-lg border border-border bg-background p-4">
-                    <p className="text-sm font-semibold text-foreground">Transparência</p>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                      Quer ver detalhes do projeto, necessidades atuais e como a ajuda é aplicada? Fale com a liderança e peça o
-                      relatório/atualizações.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                <CarouselPrevious className="left-3" />
+                <CarouselNext className="right-3" />
+              </Carousel>
             </div>
           </div>
         </section>
       </main>
 
       <SiteFooter />
+
+      <Dialog open={lightboxIndex !== null} onOpenChange={(open) => (!open ? setLightboxIndex(null) : null)}>
+        <DialogContent className="max-w-[92vw] p-0 sm:max-w-[980px]">
+          {lightboxIndex !== null ? (
+            <div className="relative">
+              <div className="grid max-h-[82vh] place-items-center bg-muted p-2">
+                <img
+                  src={lightboxImages[lightboxIndex]}
+                  alt={africaGallery[lightboxIndex]?.alt ?? "Foto da missão"}
+                  className="max-h-[80vh] w-auto max-w-[92vw] object-contain"
+                  decoding="async"
+                />
+              </div>
+
+              <div className="flex items-center justify-between gap-2 border-t border-border bg-background p-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setLightboxIndex((i) => (i === null ? null : (i - 1 + lightboxImages.length) % lightboxImages.length))}
+                  disabled={lightboxImages.length <= 1}
+                >
+                  Anterior
+                </Button>
+                <p className="text-xs text-muted-foreground">
+                  {lightboxIndex + 1} / {lightboxImages.length}
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setLightboxIndex((i) => (i === null ? null : (i + 1) % lightboxImages.length))}
+                  disabled={lightboxImages.length <= 1}
+                >
+                  Próxima
+                </Button>
+              </div>
+            </div>
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
