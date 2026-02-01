@@ -2,6 +2,10 @@ import { useEffect } from "react";
 
 import paperTexture from "@/assets/texture-paper-fine.png";
 import heroImage from "@/assets/bg-cultos-ao-vivo-user-treated-v2.jpg";
+import africaKids1 from "@/assets/missoes-africa-criancas-01.jpeg";
+import africaKids1Large from "@/assets/missoes-africa-criancas-01-1536.jpeg";
+import africaTeam1 from "@/assets/missoes-africa-equipe-01.jpeg";
+import africaKids2 from "@/assets/missoes-africa-criancas-02.jpeg";
 import { ElementorHeader } from "@/components/site/ElementorHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +26,23 @@ export default function Missoes() {
     t("missions_value_3"),
     t("missions_value_4"),
     t("missions_value_5"),
+  ];
+
+  const africaGallery = [
+    {
+      src: africaKids1,
+      alt: "Crianças reunidas em atividade comunitária durante a missão",
+      // Prefer the larger file when available
+      srcSet: `${africaKids1} 1024w, ${africaKids1Large} 1536w`,
+    },
+    {
+      src: africaKids2,
+      alt: "Momento de comunhão com crianças durante uma ação da missão",
+    },
+    {
+      src: africaTeam1,
+      alt: "Equipe missionária durante apoio e serviço à comunidade",
+    },
   ];
 
   return (
@@ -148,6 +169,88 @@ export default function Missoes() {
                 <Button asChild variant="secondary" size="xl">
                   <a href="/cantina">{t("missions_cta_see_cantina")}</a>
                 </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* MISSÃO CRIANÇAS NA ÁFRICA */}
+        <section aria-label="Missão de Crianças na África" className="bg-background">
+          <div className="mx-auto w-full max-w-[1155px] px-6 py-12 md:py-16">
+            <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-start">
+              <div>
+                <p className="font-display text-[12px] font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+                  Projeto em destaque
+                </p>
+                <h2 className="mt-3 font-display text-[28px] font-semibold uppercase tracking-[0.12em] text-foreground md:text-[34px]">
+                  Ajude a missão com crianças na África
+                </h2>
+                <p className="mt-4 max-w-[70ch] text-sm leading-relaxed text-muted-foreground md:text-base">
+                  Queremos apoiar crianças e famílias com presença, cuidado e ações práticas: ensino bíblico, material escolar,
+                  alimentação, roupas e apoio às atividades locais. A sua ajuda (oração, doação ou voluntariado) faz diferença real.
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge className="bg-card/85 text-foreground ring-1 ring-border backdrop-blur">Crianças</Badge>
+                  <Badge className="bg-card/85 text-foreground ring-1 ring-border backdrop-blur">Educação</Badge>
+                  <Badge className="bg-card/85 text-foreground ring-1 ring-border backdrop-blur">Assistência</Badge>
+                  <Badge className="bg-card/85 text-foreground ring-1 ring-border backdrop-blur">Evangelização</Badge>
+                </div>
+
+                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                  <Card className="p-5 shadow-elev ring-1 ring-border">
+                    <h3 className="font-display text-[13px] uppercase tracking-[0.22em] text-foreground">Orar</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">Ore por proteção, portas abertas e frutos duradouros.</p>
+                  </Card>
+                  <Card className="p-5 shadow-elev ring-1 ring-border">
+                    <h3 className="font-display text-[13px] uppercase tracking-[0.22em] text-foreground">Contribuir</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">Ajude com recursos para ações e necessidades locais.</p>
+                  </Card>
+                  <Card className="p-5 shadow-elev ring-1 ring-border">
+                    <h3 className="font-display text-[13px] uppercase tracking-[0.22em] text-foreground">Servir</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">Disponibilize-se: logística, comunicação ou viagens.</p>
+                  </Card>
+                </div>
+
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <Button asChild variant="hero" size="xl">
+                    <a href="#contribuir">Quero ajudar agora</a>
+                  </Button>
+                  <Button asChild variant="outline" size="xl">
+                    <a href="/#pastoral">Falar com a liderança</a>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-4 shadow-elev">
+                <div className="grid gap-3">
+                  <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1">
+                    {africaGallery.map((img) => (
+                      <figure key={img.alt} className="group relative overflow-hidden rounded-lg ring-1 ring-border">
+                        <img
+                          src={img.src}
+                          srcSet={img.srcSet}
+                          sizes="(max-width: 768px) 100vw, 420px"
+                          alt={img.alt}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:h-60"
+                        />
+                        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/80 to-transparent p-3 text-xs text-primary-foreground/90 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                          {img.alt}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+
+                  <div className="rounded-lg border border-border bg-background p-4">
+                    <p className="text-sm font-semibold text-foreground">Transparência</p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                      Quer ver detalhes do projeto, necessidades atuais e como a ajuda é aplicada? Fale com a liderança e peça o
+                      relatório/atualizações.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
