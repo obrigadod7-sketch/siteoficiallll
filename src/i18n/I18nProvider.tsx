@@ -50,6 +50,24 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
 export function useI18n() {
   const ctx = useContext(I18nContext);
-  if (!ctx) throw new Error("useI18n must be used within I18nProvider");
+
+  // Defensive fallback: avoids blank screens if a page/component is mounted
+  // outside the provider for any reason (e.g. isolated renders, host fallbacks).
+  if (!ctx) {
+    const fallbackLocale: Locale = "pt";
+    const fallbackT = (key: TranslationKey | string) => {
+      const base = translations.pt as Record<string, string>;
+      return base[key] ?? key;
+    };
+
+    return {
+      locale: fallbackLocale,
+      setLocale: () => {
+        // no-op in fallback mode
+      },
+      t: fallbackT,
+    };
+  }
+
   return ctx;
 }
