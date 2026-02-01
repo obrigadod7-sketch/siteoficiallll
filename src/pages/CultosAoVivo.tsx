@@ -1,5 +1,5 @@
 import paperTexture from "@/assets/texture-paper-fine.png";
-import heroImage from "@/assets/bg-cultos-ao-vivo-user-treated-v2.jpg";
+import heroImage from "@/assets/banner-cultos-ao-vivo.jpg";
 import { ElementorHeader } from "@/components/site/ElementorHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
