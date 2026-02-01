@@ -85,7 +85,7 @@ export default function CultosAoVivo() {
             <img
               src={heroImage}
               alt="Cultos ao Vivo"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover object-center md:object-[50%_30%] lg:object-[50%_25%]"
               loading="eager"
             />
 
