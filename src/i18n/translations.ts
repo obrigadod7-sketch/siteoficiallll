@@ -11,6 +11,7 @@ export type TranslationKey = keyof typeof translations.pt;
 export const translations = {
   pt: {
     // Header / Nav
+    nav_home: "Início",
     nav_estudo: "Estudo",
     nav_cultos: "Cultos",
     nav_missoes: "Missões",
@@ -344,6 +345,7 @@ export const translations = {
   },
 
   en: {
+    nav_home: "Home",
     nav_estudo: "Study",
     nav_cultos: "Services",
     nav_missoes: "Missions",
@@ -663,6 +665,7 @@ export const translations = {
   },
 
   fr: {
+    nav_home: "Accueil",
     nav_estudo: "Étude",
     nav_cultos: "Cultes",
     nav_missoes: "Missions",

@@ -16,6 +16,7 @@ export function ElementorHeader() {
   const [isMuted, setIsMuted] = useState(false);
 
   const nav = [
+    { href: "/", label: t("nav_home") },
     { href: "/estudo", label: t("nav_estudo") },
     { href: "/cultos-ao-vivo", label: t("nav_cultos") },
     { href: "/missoes", label: t("nav_missoes") },
