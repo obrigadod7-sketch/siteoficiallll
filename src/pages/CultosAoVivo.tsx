@@ -1,5 +1,5 @@
 import paperTexture from "@/assets/texture-paper-fine.png";
-import heroImage from "@/assets/banner-cultos-ao-vivo-user-3.jpg";
+import heroImage from "@/assets/banner-cultos-ao-vivo-user-3-1920.jpg";
 import { ElementorHeader } from "@/components/site/ElementorHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -81,11 +81,11 @@ export default function CultosAoVivo() {
       <main>
         {/* HERO (Netflix-style) */}
         <section aria-label={t("live_title")} className="relative overflow-hidden">
-          <div className="relative min-h-[540px] w-full md:min-h-[680px]">
+          <div className="relative w-full min-h-[420px] sm:min-h-[520px] md:min-h-[640px] lg:min-h-[720px]">
             <img
               src={heroImage}
               alt="Cultos ao Vivo"
-              className="absolute inset-0 h-full w-full object-cover object-center md:object-[50%_30%] lg:object-[50%_25%]"
+              className="absolute inset-0 h-full w-full object-cover object-[50%_35%] md:object-[50%_30%] lg:object-[50%_28%]"
               loading="eager"
             />
 
@@ -105,7 +105,7 @@ export default function CultosAoVivo() {
             {/* barra de brilho suave no rodapé do hero */}
             <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
-            <div className="relative z-10 container flex min-h-[540px] flex-col justify-end pb-14 md:min-h-[680px] md:pb-16">
+            <div className="relative z-10 container flex min-h-[420px] flex-col justify-end pb-12 sm:min-h-[520px] sm:pb-14 md:min-h-[640px] md:pb-16 lg:min-h-[720px]">
               <div className="flex flex-wrap items-center gap-2 text-xs text-primary-foreground/80">
                 <span className="inline-flex items-center rounded-full border border-primary-foreground/20 bg-mel-overlay/45 px-3 py-1 backdrop-blur">
                   {t("live_kicker_live")}
