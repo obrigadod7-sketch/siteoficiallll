@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 
 import { ElementorHeader } from "@/components/site/ElementorHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -16,9 +15,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/hooks/use-toast";
-import { useIsAdmin } from "@/hooks/use-is-admin";
 import { getMinisterioBySlug, MINISTERIO_SOCIALS } from "@/shared/ministerios";
 import CasaisMinisterio from "@/pages/CasaisMinisterio";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -88,28 +84,8 @@ export default function MinisterioDetalhe() {
     return <CasaisMinisterio ministerio={ministerio} />;
   }
 
-  const isAdminQuery = useIsAdmin();
-
-  const mediaQuery = useQuery({
-    queryKey: ["ministryMediaCache", ministerio?.slug],
-    enabled: !!ministerio?.slug,
-    queryFn: async () => {
-      if (!ministerio) return { images: [] as string[] };
-
-      // Read cache from backend (no scraping on page view)
-      const { data, error } = await supabase.functions.invoke("ministry-media", {
-        body: {
-          action: "get",
-          slug: ministerio.slug,
-        },
-      });
-      if (error) throw error;
-      return data as { success: boolean; images?: string[] };
-    },
-    staleTime: 1000 * 60 * 10,
-  });
-
-  const scrapedImages = (mediaQuery.data?.images || []).filter(Boolean);
+  // TEMPLATE REMIXÁVEL: não depende de backend para buscar imagens.
+  const scrapedImages: string[] = [];
   const galleryImages = (ministerio?.galeria || []).filter(Boolean);
   const pickedHero =
     scrapedImages.length > 0 && ministerio
@@ -231,41 +207,6 @@ export default function MinisterioDetalhe() {
             )}
 
             <div className="mt-6 flex flex-wrap gap-2">
-              {Boolean(isAdminQuery.data) && ministerio && (
-                <Button
-                  variant="secondary"
-                  disabled={mediaQuery.isFetching}
-                  onClick={async () => {
-                    try {
-                      const { data, error } = await supabase.functions.invoke("ministry-media", {
-                        body: {
-                          action: "refresh",
-                          slug: ministerio.slug,
-                          title: ministerio.titulo,
-                          sources: {
-                            facebook: MINISTERIO_SOCIALS.facebook,
-                            instagram: MINISTERIO_SOCIALS.instagram,
-                          },
-                          limit: 24,
-                        },
-                      });
-
-                      if (error || !data?.success) {
-                        throw new Error(data?.error || error?.message || "Falha ao atualizar imagens");
-                      }
-
-                      toast({ title: "Imagens atualizadas", description: "Cache atualizado com sucesso." });
-                      await mediaQuery.refetch();
-                    } catch (e) {
-                      const msg = e instanceof Error ? e.message : "Falha ao atualizar imagens";
-                      toast({ title: "Erro", description: msg, variant: "destructive" });
-                    }
-                  }}
-                >
-                  Atualizar imagens
-                </Button>
-              )}
-
               {ministerio.ctaLabel && (
                 <Button asChild variant="default">
                   <a href={MINISTERIO_SOCIALS.facebook} target="_blank" rel="noreferrer">

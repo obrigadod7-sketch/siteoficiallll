@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { useI18n } from "@/i18n/I18nProvider";
 import { translations } from "@/i18n/translations";
 
@@ -91,18 +90,12 @@ export function KidsSignupForm() {
 
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("kids_ministry_signups").insert({
-        source_slug: "ministerio-infantil",
-        parent_name: parsed.data.parent_name,
-        child_name: parsed.data.child_name,
-        child_age: childAge,
-        phone: parsed.data.phone?.trim() || null,
-        email: parsed.data.email?.trim() || null,
-        message: parsed.data.message?.trim() || null,
+      // TEMPLATE REMIXÁVEL: não envia dados para backend.
+      void childAge; // mantém cálculo (validação) sem enviar.
+      toast({
+        title: tx("kids_signup_sent"),
+        description: "Modo template: os dados não são salvos. No seu remix, você pode habilitar o envio no backend.",
       });
-      if (error) throw error;
-
-      toast({ title: tx("kids_signup_sent"), description: tx("kids_signup_sent_desc") });
       form.reset();
     } catch (e) {
       const msg = e instanceof Error ? e.message : tx("kids_signup_error");
