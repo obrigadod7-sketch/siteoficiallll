@@ -19,19 +19,11 @@ import AdminSetup from "./pages/auth/AdminSetup";
 import ResetPassword from "./pages/auth/ResetPassword";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import AuthCallback from "./pages/auth/AuthCallback";
-import KidsDashboardLayout from "./pages/kids/KidsDashboardLayout";
-import KidsDashboardHome from "./pages/kids/KidsDashboardHome";
-import KidsChildrenPage from "./pages/kids/KidsChildrenPage";
-import KidsEventsPage from "./pages/kids/KidsEventsPage";
-import KidsCheckinsPage from "./pages/kids/KidsCheckinsPage";
-import KidsLeadsPage from "./pages/kids/KidsLeadsPage";
-import { ProtectedRoute } from "./components/auth/ProtectedRoute";
-import { ProtectedTeamRoute } from "./components/auth/ProtectedTeamRoute";
-import DashboardLayout from "./pages/dashboard/DashboardLayout";
-import DashboardHome from "./pages/dashboard/DashboardHome";
-import DashboardAluno from "./pages/dashboard/DashboardAluno";
-import ChurchAssistant from "./pages/dashboard/ChurchAssistant";
-import DashboardMembers from "./pages/dashboard/DashboardMembers";
+import TemplateDashboardLayout from "./pages/template/TemplateDashboardLayout";
+import TemplateDashboardHome from "./pages/template/TemplateDashboardHome";
+import TemplateKidsDashboardLayout from "./pages/template/TemplateKidsDashboardLayout";
+import TemplateKidsDashboardHome from "./pages/template/TemplateKidsDashboardHome";
+import TemplatePlaceholderPage from "./pages/template/TemplatePlaceholderPage";
 
 const queryClient = new QueryClient();
 
@@ -61,67 +53,27 @@ const App = () => (
             <Route path="/reset-password" element={<ResetPassword />} />
 
             {/* Site dashboard */}
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<DashboardHome />} />
-              <Route
-                path="assistant"
-                element={
-                  <ProtectedTeamRoute>
-                    <ChurchAssistant />
-                  </ProtectedTeamRoute>
-                }
-              />
-              <Route
-                path="membros"
-                element={
-                  <ProtectedTeamRoute>
-                    <DashboardMembers />
-                  </ProtectedTeamRoute>
-                }
-              />
-              <Route
-                path="aluno"
-                element={
-                  <ProtectedTeamRoute>
-                    <DashboardAluno />
-                  </ProtectedTeamRoute>
-                }
-              />
-              <Route
-                path="kids"
-                element={
-                  <ProtectedTeamRoute>
-                    <KidsDashboardLayout basePath="/dashboard/kids" />
-                  </ProtectedTeamRoute>
-                }
-              >
-                <Route index element={<KidsDashboardHome />} />
-                <Route path="criancas" element={<KidsChildrenPage />} />
-                <Route path="eventos" element={<KidsEventsPage />} />
-                <Route path="checkin" element={<KidsCheckinsPage />} />
-                <Route path="leads" element={<KidsLeadsPage />} />
+            <Route path="/dashboard" element={<TemplateDashboardLayout />}>
+              <Route index element={<TemplateDashboardHome />} />
+              <Route path="assistant" element={<TemplatePlaceholderPage title="Assistente (demo)" />} />
+              <Route path="membros" element={<TemplatePlaceholderPage title="Membros (demo)" />} />
+              <Route path="aluno" element={<TemplatePlaceholderPage title="Área do Aluno (demo)" />} />
+              <Route path="kids" element={<TemplateKidsDashboardLayout basePath="/dashboard/kids" />}>
+                <Route index element={<TemplateKidsDashboardHome />} />
+                <Route path="criancas" element={<TemplatePlaceholderPage title="Crianças & Famílias (demo)" />} />
+                <Route path="eventos" element={<TemplatePlaceholderPage title="Eventos (demo)" />} />
+                <Route path="checkin" element={<TemplatePlaceholderPage title="Check-in / Check-out (demo)" />} />
+                <Route path="leads" element={<TemplatePlaceholderPage title="Leads (demo)" />} />
               </Route>
             </Route>
-            <Route
-              path="/kids/dashboard"
-              element={
-                <ProtectedRoute>
-                  <KidsDashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<KidsDashboardHome />} />
-              <Route path="criancas" element={<KidsChildrenPage />} />
-              <Route path="eventos" element={<KidsEventsPage />} />
-              <Route path="checkin" element={<KidsCheckinsPage />} />
-              <Route path="leads" element={<KidsLeadsPage />} />
+
+            {/* Rota antiga do Kids Dashboard (mantida como demo) */}
+            <Route path="/kids/dashboard" element={<TemplateKidsDashboardLayout />}>
+              <Route index element={<TemplateKidsDashboardHome />} />
+              <Route path="criancas" element={<TemplatePlaceholderPage title="Crianças & Famílias (demo)" />} />
+              <Route path="eventos" element={<TemplatePlaceholderPage title="Eventos (demo)" />} />
+              <Route path="checkin" element={<TemplatePlaceholderPage title="Check-in / Check-out (demo)" />} />
+              <Route path="leads" element={<TemplatePlaceholderPage title="Leads (demo)" />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

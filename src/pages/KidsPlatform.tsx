@@ -11,7 +11,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 type LeadValues = {
   name: string;
@@ -111,7 +110,7 @@ export default function KidsPlatform() {
           <div className="mx-auto w-full max-w-[720px] px-6 py-12 md:py-16">
             <h2 className="font-display text-2xl uppercase tracking-[0.14em]">Contato / Solicitação</h2>
             <p className="mt-3 text-sm text-muted-foreground">
-              Envie seus dados. Eles serão salvos no backend em /api/leads (interno do projeto).
+              Este formulário é um exemplo de template (remixável). Ao clicar em enviar, os dados não são salvos.
             </p>
 
             <Card className="mt-8 p-6 shadow-elev ring-1 ring-border">
@@ -120,16 +119,11 @@ export default function KidsPlatform() {
                 onSubmit={form.handleSubmit(async (values) => {
                   setSubmitting(true);
                   try {
-                    const payload = {
-                      name: values.name,
-                      email: values.email || null,
-                      phone: values.phone || null,
-                      message: values.message || null,
-                      source: "site",
-                    };
-                    const { error } = await supabase.from("leads").insert(payload);
-                    if (error) throw error;
-                    toast({ title: "Recebido!", description: "Vamos entrar em contato em breve." });
+                    // TEMPLATE REMIXÁVEL: não envia dados para backend.
+                    toast({
+                      title: "Enviado (modo template)",
+                      description: "Neste template, os dados não são salvos. No seu projeto, você pode conectar ao backend.",
+                    });
                     form.reset();
                   } catch (e: any) {
                     toast({ title: "Não foi possível enviar", description: e?.message ?? "Tente novamente.", variant: "destructive" });

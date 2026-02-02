@@ -30,7 +30,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { useI18n } from "@/i18n/I18nProvider";
 
 type SignupValues = {
@@ -270,19 +269,13 @@ export default function CasaisMinisterio({ ministerio }: { ministerio: Ministeri
       source_slug: ministerio.slug,
     };
 
-    try {
-      const { error } = await supabase.from("couple_ministry_signups").insert(clean);
-      if (error) throw error;
-
-      toast({
-        title: t("couples_signup_sent"),
-        description: t("couples_signup_sent_desc"),
-      });
-      form.reset();
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : t("couples_signup_error");
-      toast({ title: t("error"), description: msg, variant: "destructive" });
-    }
+    // TEMPLATE REMIXÁVEL: não envia dados para backend.
+    void clean;
+    toast({
+      title: t("couples_signup_sent"),
+      description: "Modo template: os dados não são salvos. No seu remix, você pode habilitar o envio no backend.",
+    });
+    form.reset();
   };
 
   return (
